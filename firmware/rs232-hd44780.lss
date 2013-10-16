@@ -1,0 +1,1858 @@
+
+wafad.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000006ec  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .bss          00000081  00800100  00800100  00000760  2**0
+                  ALLOC
+  2 .stab         000006b4  00000000  00000000  00000760  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  3 .stabstr      00000054  00000000  00000000  00000e14  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_aranges 00000020  00000000  00000000  00000e68  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_pubnames 000000c9  00000000  00000000  00000e88  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000793  00000000  00000000  00000f51  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 0000028a  00000000  00000000  000016e4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000847  00000000  00000000  0000196e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  000000d0  00000000  00000000  000021b8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    00000159  00000000  00000000  00002288  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    0000058e  00000000  00000000  000023e1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000080  00000000  00000000  0000296f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	19 c0       	rjmp	.+50     	; 0x34 <__ctors_end>
+   2:	33 c0       	rjmp	.+102    	; 0x6a <__bad_interrupt>
+   4:	32 c0       	rjmp	.+100    	; 0x6a <__bad_interrupt>
+   6:	31 c0       	rjmp	.+98     	; 0x6a <__bad_interrupt>
+   8:	30 c0       	rjmp	.+96     	; 0x6a <__bad_interrupt>
+   a:	2f c0       	rjmp	.+94     	; 0x6a <__bad_interrupt>
+   c:	2e c0       	rjmp	.+92     	; 0x6a <__bad_interrupt>
+   e:	2d c0       	rjmp	.+90     	; 0x6a <__bad_interrupt>
+  10:	2c c0       	rjmp	.+88     	; 0x6a <__bad_interrupt>
+  12:	2b c0       	rjmp	.+86     	; 0x6a <__bad_interrupt>
+  14:	2a c0       	rjmp	.+84     	; 0x6a <__bad_interrupt>
+  16:	29 c0       	rjmp	.+82     	; 0x6a <__bad_interrupt>
+  18:	28 c0       	rjmp	.+80     	; 0x6a <__bad_interrupt>
+  1a:	27 c0       	rjmp	.+78     	; 0x6a <__bad_interrupt>
+  1c:	26 c0       	rjmp	.+76     	; 0x6a <__bad_interrupt>
+  1e:	25 c0       	rjmp	.+74     	; 0x6a <__bad_interrupt>
+  20:	24 c0       	rjmp	.+72     	; 0x6a <__bad_interrupt>
+  22:	23 c0       	rjmp	.+70     	; 0x6a <__bad_interrupt>
+  24:	22 c0       	rjmp	.+68     	; 0x6a <__bad_interrupt>
+  26:	21 c0       	rjmp	.+66     	; 0x6a <__bad_interrupt>
+  28:	20 c0       	rjmp	.+64     	; 0x6a <__bad_interrupt>
+  2a:	1f c0       	rjmp	.+62     	; 0x6a <__bad_interrupt>
+  2c:	1e c0       	rjmp	.+60     	; 0x6a <__bad_interrupt>
+  2e:	1d c0       	rjmp	.+58     	; 0x6a <__bad_interrupt>
+  30:	1c c0       	rjmp	.+56     	; 0x6a <__bad_interrupt>
+  32:	1b c0       	rjmp	.+54     	; 0x6a <__bad_interrupt>
+
+00000034 <__ctors_end>:
+  34:	11 24       	eor	r1, r1
+  36:	1f be       	out	0x3f, r1	; 63
+  38:	cf ef       	ldi	r28, 0xFF	; 255
+  3a:	d4 e0       	ldi	r29, 0x04	; 4
+  3c:	de bf       	out	0x3e, r29	; 62
+  3e:	cd bf       	out	0x3d, r28	; 61
+
+00000040 <__do_copy_data>:
+  40:	11 e0       	ldi	r17, 0x01	; 1
+  42:	a0 e0       	ldi	r26, 0x00	; 0
+  44:	b1 e0       	ldi	r27, 0x01	; 1
+  46:	ec ee       	ldi	r30, 0xEC	; 236
+  48:	f6 e0       	ldi	r31, 0x06	; 6
+  4a:	02 c0       	rjmp	.+4      	; 0x50 <.do_copy_data_start>
+
+0000004c <.do_copy_data_loop>:
+  4c:	05 90       	lpm	r0, Z+
+  4e:	0d 92       	st	X+, r0
+
+00000050 <.do_copy_data_start>:
+  50:	a0 30       	cpi	r26, 0x00	; 0
+  52:	b1 07       	cpc	r27, r17
+  54:	d9 f7       	brne	.-10     	; 0x4c <.do_copy_data_loop>
+
+00000056 <__do_clear_bss>:
+  56:	11 e0       	ldi	r17, 0x01	; 1
+  58:	a0 e0       	ldi	r26, 0x00	; 0
+  5a:	b1 e0       	ldi	r27, 0x01	; 1
+  5c:	01 c0       	rjmp	.+2      	; 0x60 <.do_clear_bss_start>
+
+0000005e <.do_clear_bss_loop>:
+  5e:	1d 92       	st	X+, r1
+
+00000060 <.do_clear_bss_start>:
+  60:	a1 38       	cpi	r26, 0x81	; 129
+  62:	b1 07       	cpc	r27, r17
+  64:	e1 f7       	brne	.-8      	; 0x5e <.do_clear_bss_loop>
+  66:	ac d2       	rcall	.+1368   	; 0x5c0 <main>
+  68:	3f c3       	rjmp	.+1662   	; 0x6e8 <_exit>
+
+0000006a <__bad_interrupt>:
+  6a:	ca cf       	rjmp	.-108    	; 0x0 <__vectors>
+
+0000006c <waitForTimer>:
+	
+
+}
+
+void waitForTimer()
+{
+  6c:	01 c0       	rjmp	.+2      	; 0x70 <waitForTimer+0x4>
+	while(!(TIFR1&(1<<OCF1A)))
+		asm("nop");
+  6e:	00 00       	nop
+
+}
+
+void waitForTimer()
+{
+	while(!(TIFR1&(1<<OCF1A)))
+  70:	b1 9b       	sbis	0x16, 1	; 22
+  72:	fd cf       	rjmp	.-6      	; 0x6e <waitForTimer+0x2>
+		asm("nop");
+	/* clear the flag */
+	TIFR1 |= (1<<OCF1A);
+  74:	b1 9a       	sbi	0x16, 1	; 22
+}
+  76:	08 95       	ret
+
+00000078 <readFlash>:
+	d       pointer to store the data to
+	adr		address to read the first byte from (adr is auto incrmented)
+	len		number of bytes to read
+*/
+uint8_t readFlash(uint8_t *d, uint32_t adr, uint8_t len)
+{
+  78:	1f 93       	push	r17
+  7a:	38 2f       	mov	r19, r24
+  7c:	e9 2f       	mov	r30, r25
+  7e:	12 2f       	mov	r17, r18
+	/* deactivate hold condition */
+	SET_FLASH_HOLD();
+  80:	5f 9a       	sbi	0x0b, 7	; 11
+	/* setup correct spi mode */
+	SPCR = (0<<SPIE) | (1<<SPE) | (0<<DORD) | (1<<MSTR) | (0<<CPOL) | (0<<CPHA) | (1<<SPR1) | (0<<SPR0);
+  82:	82 e5       	ldi	r24, 0x52	; 82
+  84:	8c bd       	out	0x2c, r24	; 44
+	SPSR = 0;
+  86:	1d bc       	out	0x2d, r1	; 45
+	/* check validity of address */
+	if (adr >= FLASH_SIZE)
+  88:	40 30       	cpi	r20, 0x00	; 0
+  8a:	80 e0       	ldi	r24, 0x00	; 0
+  8c:	58 07       	cpc	r21, r24
+  8e:	82 e0       	ldi	r24, 0x02	; 2
+  90:	68 07       	cpc	r22, r24
+  92:	80 e0       	ldi	r24, 0x00	; 0
+  94:	78 07       	cpc	r23, r24
+  96:	10 f0       	brcs	.+4      	; 0x9c <readFlash+0x24>
+  98:	80 e0       	ldi	r24, 0x00	; 0
+  9a:	38 c0       	rjmp	.+112    	; 0x10c <readFlash+0x94>
+		return 0; 
+	/* select flash */
+	CLR_FLASH_CS();
+  9c:	29 98       	cbi	0x05, 1	; 5
+}
+
+/* send a byte per spi, the received data is returned */
+uint8_t spiTransfer (uint8_t d)
+{
+	SPDR = d;
+  9e:	83 e0       	ldi	r24, 0x03	; 3
+  a0:	8e bd       	out	0x2e, r24	; 46
+  a2:	01 c0       	rjmp	.+2      	; 0xa6 <readFlash+0x2e>
+		while (!(SPSR&(1<<SPIF)))
+			asm("nop");
+  a4:	00 00       	nop
+
+/* send a byte per spi, the received data is returned */
+uint8_t spiTransfer (uint8_t d)
+{
+	SPDR = d;
+		while (!(SPSR&(1<<SPIF)))
+  a6:	0d b4       	in	r0, 0x2d	; 45
+  a8:	07 fe       	sbrs	r0, 7
+  aa:	fc cf       	rjmp	.-8      	; 0xa4 <readFlash+0x2c>
+			asm("nop");
+	return (SPDR);
+  ac:	8e b5       	in	r24, 0x2e	; 46
+	CLR_FLASH_CS();
+	//asm("nop");
+	/* send read command */	
+	spiTransfer(FLASH_READ);
+	/* send the address */
+	spiTransfer((adr>>16)&0xff);
+  ae:	cb 01       	movw	r24, r22
+  b0:	aa 27       	eor	r26, r26
+  b2:	bb 27       	eor	r27, r27
+}
+
+/* send a byte per spi, the received data is returned */
+uint8_t spiTransfer (uint8_t d)
+{
+	SPDR = d;
+  b4:	8e bd       	out	0x2e, r24	; 46
+  b6:	01 c0       	rjmp	.+2      	; 0xba <readFlash+0x42>
+		while (!(SPSR&(1<<SPIF)))
+			asm("nop");
+  b8:	00 00       	nop
+
+/* send a byte per spi, the received data is returned */
+uint8_t spiTransfer (uint8_t d)
+{
+	SPDR = d;
+		while (!(SPSR&(1<<SPIF)))
+  ba:	0d b4       	in	r0, 0x2d	; 45
+  bc:	07 fe       	sbrs	r0, 7
+  be:	fc cf       	rjmp	.-8      	; 0xb8 <readFlash+0x40>
+			asm("nop");
+	return (SPDR);
+  c0:	8e b5       	in	r24, 0x2e	; 46
+	//asm("nop");
+	/* send read command */	
+	spiTransfer(FLASH_READ);
+	/* send the address */
+	spiTransfer((adr>>16)&0xff);
+	spiTransfer((adr>>8)&0xff);
+  c2:	bb 27       	eor	r27, r27
+  c4:	a7 2f       	mov	r26, r23
+  c6:	96 2f       	mov	r25, r22
+  c8:	85 2f       	mov	r24, r21
+}
+
+/* send a byte per spi, the received data is returned */
+uint8_t spiTransfer (uint8_t d)
+{
+	SPDR = d;
+  ca:	8e bd       	out	0x2e, r24	; 46
+  cc:	01 c0       	rjmp	.+2      	; 0xd0 <readFlash+0x58>
+		while (!(SPSR&(1<<SPIF)))
+			asm("nop");
+  ce:	00 00       	nop
+
+/* send a byte per spi, the received data is returned */
+uint8_t spiTransfer (uint8_t d)
+{
+	SPDR = d;
+		while (!(SPSR&(1<<SPIF)))
+  d0:	0d b4       	in	r0, 0x2d	; 45
+  d2:	07 fe       	sbrs	r0, 7
+  d4:	fc cf       	rjmp	.-8      	; 0xce <readFlash+0x56>
+			asm("nop");
+	return (SPDR);
+  d6:	8e b5       	in	r24, 0x2e	; 46
+}
+
+/* send a byte per spi, the received data is returned */
+uint8_t spiTransfer (uint8_t d)
+{
+	SPDR = d;
+  d8:	4e bd       	out	0x2e, r20	; 46
+  da:	01 c0       	rjmp	.+2      	; 0xde <readFlash+0x66>
+		while (!(SPSR&(1<<SPIF)))
+			asm("nop");
+  dc:	00 00       	nop
+
+/* send a byte per spi, the received data is returned */
+uint8_t spiTransfer (uint8_t d)
+{
+	SPDR = d;
+		while (!(SPSR&(1<<SPIF)))
+  de:	0d b4       	in	r0, 0x2d	; 45
+  e0:	07 fe       	sbrs	r0, 7
+  e2:	fc cf       	rjmp	.-8      	; 0xdc <readFlash+0x64>
+			asm("nop");
+	return (SPDR);
+  e4:	8e b5       	in	r24, 0x2e	; 46
+  e6:	83 2f       	mov	r24, r19
+  e8:	9e 2f       	mov	r25, r30
+  ea:	9c 01       	movw	r18, r24
+  ec:	f9 01       	movw	r30, r18
+  ee:	90 e0       	ldi	r25, 0x00	; 0
+  f0:	09 c0       	rjmp	.+18     	; 0x104 <readFlash+0x8c>
+}
+
+/* send a byte per spi, the received data is returned */
+uint8_t spiTransfer (uint8_t d)
+{
+	SPDR = d;
+  f2:	1e bc       	out	0x2e, r1	; 46
+  f4:	01 c0       	rjmp	.+2      	; 0xf8 <readFlash+0x80>
+		while (!(SPSR&(1<<SPIF)))
+			asm("nop");
+  f6:	00 00       	nop
+
+/* send a byte per spi, the received data is returned */
+uint8_t spiTransfer (uint8_t d)
+{
+	SPDR = d;
+		while (!(SPSR&(1<<SPIF)))
+  f8:	0d b4       	in	r0, 0x2d	; 45
+  fa:	07 fe       	sbrs	r0, 7
+  fc:	fc cf       	rjmp	.-8      	; 0xf6 <readFlash+0x7e>
+			asm("nop");
+	return (SPDR);
+  fe:	8e b5       	in	r24, 0x2e	; 46
+	spiTransfer((adr>>16)&0xff);
+	spiTransfer((adr>>8)&0xff);
+	spiTransfer(adr&0xff);
+	/* read the data bytes */
+	for (uint8_t i=0; i<len; i++)
+		d[i] = spiTransfer(0);
+ 100:	81 93       	st	Z+, r24
+	/* send the address */
+	spiTransfer((adr>>16)&0xff);
+	spiTransfer((adr>>8)&0xff);
+	spiTransfer(adr&0xff);
+	/* read the data bytes */
+	for (uint8_t i=0; i<len; i++)
+ 102:	9f 5f       	subi	r25, 0xFF	; 255
+ 104:	91 17       	cp	r25, r17
+ 106:	a8 f3       	brcs	.-22     	; 0xf2 <readFlash+0x7a>
+		d[i] = spiTransfer(0);
+	/* deactivate the flash */
+	SET_FLASH_CS();
+ 108:	29 9a       	sbi	0x05, 1	; 5
+ 10a:	81 e0       	ldi	r24, 0x01	; 1
+	return 1;
+}
+ 10c:	1f 91       	pop	r17
+ 10e:	08 95       	ret
+
+00000110 <readLine>:
+   ind:		Index of the line, within 0..128*1024/LINE_LENGTH
+   return:	0 - ind is out of bounds
+   			1 - data successfully copied to d
+   */
+uint8_t readLine (unsigned char *d, uint16_t ind)
+{
+ 110:	0f 93       	push	r16
+ 112:	1f 93       	push	r17
+ 114:	8c 01       	movw	r16, r24
+	uint32_t adr;
+	/* calculate the address, each line is LINE_LEGTH bytes long */
+	adr = (LINE_LENGTH * ((uint32_t)ind)) + FLASH_HEADER_LENGTH;
+	return readFlash(d, adr, LINE_LENGTH);
+ 116:	80 e0       	ldi	r24, 0x00	; 0
+ 118:	90 e0       	ldi	r25, 0x00	; 0
+ 11a:	26 e0       	ldi	r18, 0x06	; 6
+ 11c:	30 e0       	ldi	r19, 0x00	; 0
+ 11e:	40 e0       	ldi	r20, 0x00	; 0
+ 120:	50 e0       	ldi	r21, 0x00	; 0
+ 122:	c3 d2       	rcall	.+1414   	; 0x6aa <__mulsi3>
+ 124:	ab 01       	movw	r20, r22
+ 126:	bc 01       	movw	r22, r24
+ 128:	4f 5f       	subi	r20, 0xFF	; 255
+ 12a:	5f 4f       	sbci	r21, 0xFF	; 255
+ 12c:	6f 4f       	sbci	r22, 0xFF	; 255
+ 12e:	7f 4f       	sbci	r23, 0xFF	; 255
+ 130:	44 0f       	add	r20, r20
+ 132:	55 1f       	adc	r21, r21
+ 134:	66 1f       	adc	r22, r22
+ 136:	77 1f       	adc	r23, r23
+ 138:	c8 01       	movw	r24, r16
+ 13a:	2c e0       	ldi	r18, 0x0C	; 12
+ 13c:	9d df       	rcall	.-198    	; 0x78 <readFlash>
+}
+ 13e:	1f 91       	pop	r17
+ 140:	0f 91       	pop	r16
+ 142:	08 95       	ret
+
+00000144 <writeFlash>:
+	d 	 	pointer to data
+	adr		address to write data at
+	len		number of bytes to write
+*/
+uint8_t writeFlash(uint8_t *d, uint32_t adr, uint8_t len)
+{
+ 144:	1f 93       	push	r17
+ 146:	38 2f       	mov	r19, r24
+ 148:	e9 2f       	mov	r30, r25
+ 14a:	12 2f       	mov	r17, r18
+	uint8_t i;
+	/* setup correct spi mode */
+	SPCR = (0<<SPIE) | (1<<SPE) | (0<<DORD) | (1<<MSTR) | (0<<CPOL) | (0<<CPHA) | (1<<SPR1) | (0<<SPR0);
+ 14c:	82 e5       	ldi	r24, 0x52	; 82
+ 14e:	8c bd       	out	0x2c, r24	; 44
+	SPSR = 0;
+ 150:	1d bc       	out	0x2d, r1	; 45
+	/* check validity of address */
+	if (adr >= FLASH_SIZE)
+ 152:	40 30       	cpi	r20, 0x00	; 0
+ 154:	80 e0       	ldi	r24, 0x00	; 0
+ 156:	58 07       	cpc	r21, r24
+ 158:	82 e0       	ldi	r24, 0x02	; 2
+ 15a:	68 07       	cpc	r22, r24
+ 15c:	80 e0       	ldi	r24, 0x00	; 0
+ 15e:	78 07       	cpc	r23, r24
+ 160:	10 f0       	brcs	.+4      	; 0x166 <writeFlash+0x22>
+ 162:	80 e0       	ldi	r24, 0x00	; 0
+ 164:	48 c0       	rjmp	.+144    	; 0x1f6 <writeFlash+0xb2>
+		return 0;
+	/* select flash */
+	CLR_FLASH_CS();
+ 166:	29 98       	cbi	0x05, 1	; 5
+}
+
+/* send a byte per spi, the received data is returned */
+uint8_t spiTransfer (uint8_t d)
+{
+	SPDR = d;
+ 168:	86 e0       	ldi	r24, 0x06	; 6
+ 16a:	8e bd       	out	0x2e, r24	; 46
+ 16c:	01 c0       	rjmp	.+2      	; 0x170 <writeFlash+0x2c>
+		while (!(SPSR&(1<<SPIF)))
+			asm("nop");
+ 16e:	00 00       	nop
+
+/* send a byte per spi, the received data is returned */
+uint8_t spiTransfer (uint8_t d)
+{
+	SPDR = d;
+		while (!(SPSR&(1<<SPIF)))
+ 170:	0d b4       	in	r0, 0x2d	; 45
+ 172:	07 fe       	sbrs	r0, 7
+ 174:	fc cf       	rjmp	.-8      	; 0x16e <writeFlash+0x2a>
+			asm("nop");
+	return (SPDR);
+ 176:	8e b5       	in	r24, 0x2e	; 46
+		return 0;
+	/* select flash */
+	CLR_FLASH_CS();
+	/* send read command */	
+	spiTransfer(FLASH_WREN);
+	SET_FLASH_CS();
+ 178:	29 9a       	sbi	0x05, 1	; 5
+ 17a:	80 e0       	ldi	r24, 0x00	; 0
+	for (i=0; i<100; i++)
+		asm("nop");
+ 17c:	00 00       	nop
+	/* select flash */
+	CLR_FLASH_CS();
+	/* send read command */	
+	spiTransfer(FLASH_WREN);
+	SET_FLASH_CS();
+	for (i=0; i<100; i++)
+ 17e:	8f 5f       	subi	r24, 0xFF	; 255
+ 180:	84 36       	cpi	r24, 0x64	; 100
+ 182:	e1 f7       	brne	.-8      	; 0x17c <writeFlash+0x38>
+		asm("nop");
+	CLR_FLASH_CS();
+ 184:	29 98       	cbi	0x05, 1	; 5
+}
+
+/* send a byte per spi, the received data is returned */
+uint8_t spiTransfer (uint8_t d)
+{
+	SPDR = d;
+ 186:	82 e0       	ldi	r24, 0x02	; 2
+ 188:	8e bd       	out	0x2e, r24	; 46
+ 18a:	01 c0       	rjmp	.+2      	; 0x18e <writeFlash+0x4a>
+		while (!(SPSR&(1<<SPIF)))
+			asm("nop");
+ 18c:	00 00       	nop
+
+/* send a byte per spi, the received data is returned */
+uint8_t spiTransfer (uint8_t d)
+{
+	SPDR = d;
+		while (!(SPSR&(1<<SPIF)))
+ 18e:	0d b4       	in	r0, 0x2d	; 45
+ 190:	07 fe       	sbrs	r0, 7
+ 192:	fc cf       	rjmp	.-8      	; 0x18c <writeFlash+0x48>
+			asm("nop");
+	return (SPDR);
+ 194:	8e b5       	in	r24, 0x2e	; 46
+	SET_FLASH_CS();
+	for (i=0; i<100; i++)
+		asm("nop");
+	CLR_FLASH_CS();
+	spiTransfer(FLASH_WRITE);
+	spiTransfer((adr>>16)&0xff);
+ 196:	cb 01       	movw	r24, r22
+ 198:	aa 27       	eor	r26, r26
+ 19a:	bb 27       	eor	r27, r27
+}
+
+/* send a byte per spi, the received data is returned */
+uint8_t spiTransfer (uint8_t d)
+{
+	SPDR = d;
+ 19c:	8e bd       	out	0x2e, r24	; 46
+ 19e:	01 c0       	rjmp	.+2      	; 0x1a2 <writeFlash+0x5e>
+		while (!(SPSR&(1<<SPIF)))
+			asm("nop");
+ 1a0:	00 00       	nop
+
+/* send a byte per spi, the received data is returned */
+uint8_t spiTransfer (uint8_t d)
+{
+	SPDR = d;
+		while (!(SPSR&(1<<SPIF)))
+ 1a2:	0d b4       	in	r0, 0x2d	; 45
+ 1a4:	07 fe       	sbrs	r0, 7
+ 1a6:	fc cf       	rjmp	.-8      	; 0x1a0 <writeFlash+0x5c>
+			asm("nop");
+	return (SPDR);
+ 1a8:	8e b5       	in	r24, 0x2e	; 46
+	for (i=0; i<100; i++)
+		asm("nop");
+	CLR_FLASH_CS();
+	spiTransfer(FLASH_WRITE);
+	spiTransfer((adr>>16)&0xff);
+	spiTransfer((adr>>8)&0xff);
+ 1aa:	bb 27       	eor	r27, r27
+ 1ac:	a7 2f       	mov	r26, r23
+ 1ae:	96 2f       	mov	r25, r22
+ 1b0:	85 2f       	mov	r24, r21
+}
+
+/* send a byte per spi, the received data is returned */
+uint8_t spiTransfer (uint8_t d)
+{
+	SPDR = d;
+ 1b2:	8e bd       	out	0x2e, r24	; 46
+ 1b4:	01 c0       	rjmp	.+2      	; 0x1b8 <writeFlash+0x74>
+		while (!(SPSR&(1<<SPIF)))
+			asm("nop");
+ 1b6:	00 00       	nop
+
+/* send a byte per spi, the received data is returned */
+uint8_t spiTransfer (uint8_t d)
+{
+	SPDR = d;
+		while (!(SPSR&(1<<SPIF)))
+ 1b8:	0d b4       	in	r0, 0x2d	; 45
+ 1ba:	07 fe       	sbrs	r0, 7
+ 1bc:	fc cf       	rjmp	.-8      	; 0x1b6 <writeFlash+0x72>
+			asm("nop");
+	return (SPDR);
+ 1be:	8e b5       	in	r24, 0x2e	; 46
+}
+
+/* send a byte per spi, the received data is returned */
+uint8_t spiTransfer (uint8_t d)
+{
+	SPDR = d;
+ 1c0:	4e bd       	out	0x2e, r20	; 46
+ 1c2:	01 c0       	rjmp	.+2      	; 0x1c6 <writeFlash+0x82>
+		while (!(SPSR&(1<<SPIF)))
+			asm("nop");
+ 1c4:	00 00       	nop
+
+/* send a byte per spi, the received data is returned */
+uint8_t spiTransfer (uint8_t d)
+{
+	SPDR = d;
+		while (!(SPSR&(1<<SPIF)))
+ 1c6:	0d b4       	in	r0, 0x2d	; 45
+ 1c8:	07 fe       	sbrs	r0, 7
+ 1ca:	fc cf       	rjmp	.-8      	; 0x1c4 <writeFlash+0x80>
+			asm("nop");
+	return (SPDR);
+ 1cc:	8e b5       	in	r24, 0x2e	; 46
+ 1ce:	83 2f       	mov	r24, r19
+ 1d0:	9e 2f       	mov	r25, r30
+ 1d2:	9c 01       	movw	r18, r24
+ 1d4:	f9 01       	movw	r30, r18
+ 1d6:	90 e0       	ldi	r25, 0x00	; 0
+ 1d8:	0a c0       	rjmp	.+20     	; 0x1ee <writeFlash+0xaa>
+	spiTransfer(FLASH_WRITE);
+	spiTransfer((adr>>16)&0xff);
+	spiTransfer((adr>>8)&0xff);
+	spiTransfer(adr&0xff);
+	for (i=0; i<len; i++)
+		spiTransfer(d[i]);
+ 1da:	80 81       	ld	r24, Z
+}
+
+/* send a byte per spi, the received data is returned */
+uint8_t spiTransfer (uint8_t d)
+{
+	SPDR = d;
+ 1dc:	8e bd       	out	0x2e, r24	; 46
+ 1de:	01 c0       	rjmp	.+2      	; 0x1e2 <writeFlash+0x9e>
+		while (!(SPSR&(1<<SPIF)))
+			asm("nop");
+ 1e0:	00 00       	nop
+
+/* send a byte per spi, the received data is returned */
+uint8_t spiTransfer (uint8_t d)
+{
+	SPDR = d;
+		while (!(SPSR&(1<<SPIF)))
+ 1e2:	0d b4       	in	r0, 0x2d	; 45
+ 1e4:	07 fe       	sbrs	r0, 7
+ 1e6:	fc cf       	rjmp	.-8      	; 0x1e0 <writeFlash+0x9c>
+			asm("nop");
+	return (SPDR);
+ 1e8:	8e b5       	in	r24, 0x2e	; 46
+	CLR_FLASH_CS();
+	spiTransfer(FLASH_WRITE);
+	spiTransfer((adr>>16)&0xff);
+	spiTransfer((adr>>8)&0xff);
+	spiTransfer(adr&0xff);
+	for (i=0; i<len; i++)
+ 1ea:	9f 5f       	subi	r25, 0xFF	; 255
+ 1ec:	31 96       	adiw	r30, 0x01	; 1
+ 1ee:	91 17       	cp	r25, r17
+ 1f0:	a0 f3       	brcs	.-24     	; 0x1da <writeFlash+0x96>
+		spiTransfer(d[i]);
+	/* deactivate the flash */
+	SET_FLASH_CS();	
+ 1f2:	29 9a       	sbi	0x05, 1	; 5
+ 1f4:	81 e0       	ldi	r24, 0x01	; 1
+	return 1;
+}
+ 1f6:	1f 91       	pop	r17
+ 1f8:	08 95       	ret
+
+000001fa <calcCRC>:
+
+/* CRC algorithm */
+uint16_t calcCRC(char c, unsigned short crc)
+{
+ 1fa:	28 e0       	ldi	r18, 0x08	; 8
+ 1fc:	30 e0       	ldi	r19, 0x00	; 0
+		
+		if (crc & 0x8000) 
+		{
+			crc <<= 1;
+			crc += ((c&0x80)?1:0);
+			crc ^= 0x1021;
+ 1fe:	e1 e2       	ldi	r30, 0x21	; 33
+ 200:	f0 e1       	ldi	r31, 0x10	; 16
+ 202:	1d c0       	rjmp	.+58     	; 0x23e <calcCRC+0x44>
+ 204:	ab 01       	movw	r20, r22
+ 206:	44 0f       	add	r20, r20
+ 208:	55 1f       	adc	r21, r21
+uint16_t calcCRC(char c, unsigned short crc)
+{
+	for (int count=8; --count>=0;)
+	{
+		
+		if (crc & 0x8000) 
+ 20a:	77 ff       	sbrs	r23, 7
+ 20c:	0d c0       	rjmp	.+26     	; 0x228 <calcCRC+0x2e>
+		{
+			crc <<= 1;
+			crc += ((c&0x80)?1:0);
+ 20e:	68 2f       	mov	r22, r24
+ 210:	77 27       	eor	r23, r23
+ 212:	67 fd       	sbrc	r22, 7
+ 214:	70 95       	com	r23
+ 216:	66 27       	eor	r22, r22
+ 218:	77 0f       	add	r23, r23
+ 21a:	66 1f       	adc	r22, r22
+ 21c:	77 27       	eor	r23, r23
+ 21e:	64 0f       	add	r22, r20
+ 220:	75 1f       	adc	r23, r21
+			crc ^= 0x1021;
+ 222:	6e 27       	eor	r22, r30
+ 224:	7f 27       	eor	r23, r31
+ 226:	0a c0       	rjmp	.+20     	; 0x23c <calcCRC+0x42>
+		}
+		else
+		{
+			crc <<= 1;
+			crc += ((c&0x80)?1:0);
+ 228:	68 2f       	mov	r22, r24
+ 22a:	77 27       	eor	r23, r23
+ 22c:	67 fd       	sbrc	r22, 7
+ 22e:	70 95       	com	r23
+ 230:	66 27       	eor	r22, r22
+ 232:	77 0f       	add	r23, r23
+ 234:	66 1f       	adc	r22, r22
+ 236:	77 27       	eor	r23, r23
+ 238:	64 0f       	add	r22, r20
+ 23a:	75 1f       	adc	r23, r21
+		}
+		c<<=1;
+ 23c:	88 0f       	add	r24, r24
+}
+
+/* CRC algorithm */
+uint16_t calcCRC(char c, unsigned short crc)
+{
+	for (int count=8; --count>=0;)
+ 23e:	21 50       	subi	r18, 0x01	; 1
+ 240:	30 40       	sbci	r19, 0x00	; 0
+ 242:	9f ef       	ldi	r25, 0xFF	; 255
+ 244:	2f 3f       	cpi	r18, 0xFF	; 255
+ 246:	39 07       	cpc	r19, r25
+ 248:	e9 f6       	brne	.-70     	; 0x204 <calcCRC+0xa>
+			crc += ((c&0x80)?1:0);
+		}
+		c<<=1;
+	}
+	return crc;
+}
+ 24a:	cb 01       	movw	r24, r22
+ 24c:	08 95       	ret
+
+0000024e <putchar>:
+
+void putchar (char c)
+{
+ 24e:	98 2f       	mov	r25, r24
+ 250:	01 c0       	rjmp	.+2      	; 0x254 <putchar+0x6>
+	while (!(UCSR0A&(1<<UDRE0)))
+		asm("nop");
+ 252:	00 00       	nop
+	return crc;
+}
+
+void putchar (char c)
+{
+	while (!(UCSR0A&(1<<UDRE0)))
+ 254:	80 91 c0 00 	lds	r24, 0x00C0
+ 258:	85 ff       	sbrs	r24, 5
+ 25a:	fb cf       	rjmp	.-10     	; 0x252 <putchar+0x4>
+		asm("nop");
+	UDR0 = c;
+ 25c:	90 93 c6 00 	sts	0x00C6, r25
+}
+ 260:	08 95       	ret
+
+00000262 <xModemReceiver>:
+
+
+/* receives data via xModem and stores it to the flash memory */
+void xModemReceiver()
+{
+ 262:	cf 92       	push	r12
+ 264:	df 92       	push	r13
+ 266:	ef 92       	push	r14
+ 268:	ff 92       	push	r15
+ 26a:	0f 93       	push	r16
+ 26c:	1f 93       	push	r17
+ 26e:	cf 93       	push	r28
+ 270:	df 93       	push	r29
+	uint8_t index=0;				/* data index within packet */
+	uint8_t state=XMODEM_ST_IDLE;	/* receiver state machine */
+	uint16_t crc=0;
+	uint16_t flashIndex=0;			/* address to store the received data in flash */
+
+	LED_ON();
+ 272:	41 9a       	sbi	0x08, 1	; 8
+	/* clear the uart receive buffer */
+	i = UDR0;
+ 274:	80 91 c6 00 	lds	r24, 0x00C6
+	j = UDR0;
+ 278:	70 91 c6 00 	lds	r23, 0x00C6
+ 27c:	90 e0       	ldi	r25, 0x00	; 0
+
+void putchar (char c)
+{
+	while (!(UCSR0A&(1<<UDRE0)))
+		asm("nop");
+	UDR0 = c;
+ 27e:	43 e4       	ldi	r20, 0x43	; 67
+ 280:	01 c0       	rjmp	.+2      	; 0x284 <xModemReceiver+0x22>
+}
+
+void putchar (char c)
+{
+	while (!(UCSR0A&(1<<UDRE0)))
+		asm("nop");
+ 282:	00 00       	nop
+	return crc;
+}
+
+void putchar (char c)
+{
+	while (!(UCSR0A&(1<<UDRE0)))
+ 284:	80 91 c0 00 	lds	r24, 0x00C0
+ 288:	85 ff       	sbrs	r24, 5
+ 28a:	fb cf       	rjmp	.-10     	; 0x282 <xModemReceiver+0x20>
+		asm("nop");
+	UDR0 = c;
+ 28c:	40 93 c6 00 	sts	0x00C6, r20
+ 290:	20 e0       	ldi	r18, 0x00	; 0
+ 292:	30 e0       	ldi	r19, 0x00	; 0
+{
+	uint16_t i;
+	for (i=0; i<(FRAME_RATE*((uint16_t)t));)
+	{
+		/* check the uart */
+		if (UCSR0A&(1<<RXC0))
+ 294:	80 91 c0 00 	lds	r24, 0x00C0
+ 298:	87 ff       	sbrs	r24, 7
+ 29a:	03 c0       	rjmp	.+6      	; 0x2a2 <xModemReceiver+0x40>
+		{
+			/* we have a byte */
+			(*c) = UDR0;
+ 29c:	70 91 c6 00 	lds	r23, 0x00C6
+ 2a0:	0c c0       	rjmp	.+24     	; 0x2ba <xModemReceiver+0x58>
+			return 1;
+		}
+		//waitForTimer();
+		if (TIFR1&(1<<OCF1A))
+ 2a2:	b1 9b       	sbis	0x16, 1	; 22
+ 2a4:	f7 cf       	rjmp	.-18     	; 0x294 <xModemReceiver+0x32>
+		{
+			i++;
+ 2a6:	2f 5f       	subi	r18, 0xFF	; 255
+ 2a8:	3f 4f       	sbci	r19, 0xFF	; 255
+			TIFR1 |= (1<<OCF1A);
+ 2aa:	b1 9a       	sbi	0x16, 1	; 22
+   returns 0 on timeout, 1 on success
+*/
+uint8_t receiveChar (uint8_t *c, uint8_t t)
+{
+	uint16_t i;
+	for (i=0; i<(FRAME_RATE*((uint16_t)t));)
+ 2ac:	24 36       	cpi	r18, 0x64	; 100
+ 2ae:	31 05       	cpc	r19, r1
+ 2b0:	88 f3       	brcs	.-30     	; 0x294 <xModemReceiver+0x32>
+ 2b2:	12 c1       	rjmp	.+548    	; 0x4d8 <xModemReceiver+0x276>
+		/* wait one sec for an answer from the sender */
+		if (receiveChar(&j,1))
+			break;	/* we got a char, start fsm */
+	}
+	/* if we arborted the loop we received data from the host, if the loop finished we abort */
+	if (i==10)
+ 2b4:	9a 30       	cpi	r25, 0x0A	; 10
+ 2b6:	09 f4       	brne	.+2      	; 0x2ba <xModemReceiver+0x58>
+ 2b8:	49 c0       	rjmp	.+146    	; 0x34c <xModemReceiver+0xea>
+	{
+		LED_OFF();
+		return;
+ 2ba:	01 e0       	ldi	r16, 0x01	; 1
+ 2bc:	10 e0       	ldi	r17, 0x00	; 0
+ 2be:	60 e0       	ldi	r22, 0x00	; 0
+ 2c0:	20 e0       	ldi	r18, 0x00	; 0
+ 2c2:	30 e0       	ldi	r19, 0x00	; 0
+ 2c4:	c0 e0       	ldi	r28, 0x00	; 0
+ 2c6:	d0 e0       	ldi	r29, 0x00	; 0
+		
+		if (crc & 0x8000) 
+		{
+			crc <<= 1;
+			crc += ((c&0x80)?1:0);
+			crc ^= 0x1021;
+ 2c8:	91 e2       	ldi	r25, 0x21	; 33
+ 2ca:	e9 2e       	mov	r14, r25
+ 2cc:	90 e1       	ldi	r25, 0x10	; 16
+ 2ce:	f9 2e       	mov	r15, r25
+
+void putchar (char c)
+{
+	while (!(UCSR0A&(1<<UDRE0)))
+		asm("nop");
+	UDR0 = c;
+ 2d0:	85 e1       	ldi	r24, 0x15	; 21
+ 2d2:	c8 2e       	mov	r12, r24
+ 2d4:	b6 e0       	ldi	r27, 0x06	; 6
+ 2d6:	db 2e       	mov	r13, r27
+	}
+	
+	/* frame receiving loop */
+	while(1)
+	{
+		switch (state)
+ 2d8:	63 30       	cpi	r22, 0x03	; 3
+ 2da:	09 f4       	brne	.+2      	; 0x2de <xModemReceiver+0x7c>
+ 2dc:	47 c0       	rjmp	.+142    	; 0x36c <xModemReceiver+0x10a>
+ 2de:	64 30       	cpi	r22, 0x04	; 4
+ 2e0:	28 f4       	brcc	.+10     	; 0x2ec <xModemReceiver+0x8a>
+ 2e2:	61 30       	cpi	r22, 0x01	; 1
+ 2e4:	a9 f1       	breq	.+106    	; 0x350 <xModemReceiver+0xee>
+ 2e6:	62 30       	cpi	r22, 0x02	; 2
+ 2e8:	c0 f5       	brcc	.+112    	; 0x35a <xModemReceiver+0xf8>
+ 2ea:	0e c0       	rjmp	.+28     	; 0x308 <xModemReceiver+0xa6>
+ 2ec:	65 30       	cpi	r22, 0x05	; 5
+ 2ee:	31 f0       	breq	.+12     	; 0x2fc <xModemReceiver+0x9a>
+ 2f0:	65 30       	cpi	r22, 0x05	; 5
+ 2f2:	38 f0       	brcs	.+14     	; 0x302 <xModemReceiver+0xa0>
+ 2f4:	66 30       	cpi	r22, 0x06	; 6
+ 2f6:	09 f0       	breq	.+2      	; 0x2fa <xModemReceiver+0x98>
+ 2f8:	c9 c0       	rjmp	.+402    	; 0x48c <xModemReceiver+0x22a>
+ 2fa:	d3 c0       	rjmp	.+422    	; 0x4a2 <xModemReceiver+0x240>
+ 2fc:	48 e0       	ldi	r20, 0x08	; 8
+ 2fe:	50 e0       	ldi	r21, 0x00	; 0
+ 300:	a8 c0       	rjmp	.+336    	; 0x452 <xModemReceiver+0x1f0>
+ 302:	48 e0       	ldi	r20, 0x08	; 8
+ 304:	50 e0       	ldi	r21, 0x00	; 0
+ 306:	80 c0       	rjmp	.+256    	; 0x408 <xModemReceiver+0x1a6>
+		{
+			/* idle: wait for a  start of header */
+			case XMODEM_ST_IDLE:
+				if (j==XMODEM_SOH)
+ 308:	71 30       	cpi	r23, 0x01	; 1
+ 30a:	11 f4       	brne	.+4      	; 0x310 <xModemReceiver+0xae>
+ 30c:	61 e0       	ldi	r22, 0x01	; 1
+ 30e:	c9 c0       	rjmp	.+402    	; 0x4a2 <xModemReceiver+0x240>
+					state = XMODEM_ST_FN;
+				if (j==XMODEM_EOT)
+ 310:	74 30       	cpi	r23, 0x04	; 4
+ 312:	09 f0       	breq	.+2      	; 0x316 <xModemReceiver+0xb4>
+ 314:	c6 c0       	rjmp	.+396    	; 0x4a2 <xModemReceiver+0x240>
+ 316:	01 c0       	rjmp	.+2      	; 0x31a <xModemReceiver+0xb8>
+}
+
+void putchar (char c)
+{
+	while (!(UCSR0A&(1<<UDRE0)))
+		asm("nop");
+ 318:	00 00       	nop
+	return crc;
+}
+
+void putchar (char c)
+{
+	while (!(UCSR0A&(1<<UDRE0)))
+ 31a:	80 91 c0 00 	lds	r24, 0x00C0
+ 31e:	85 ff       	sbrs	r24, 5
+ 320:	fb cf       	rjmp	.-10     	; 0x318 <xModemReceiver+0xb6>
+		asm("nop");
+	UDR0 = c;
+ 322:	86 e0       	ldi	r24, 0x06	; 6
+ 324:	80 93 c6 00 	sts	0x00C6, r24
+ 328:	01 c0       	rjmp	.+2      	; 0x32c <xModemReceiver+0xca>
+}
+
+void putchar (char c)
+{
+	while (!(UCSR0A&(1<<UDRE0)))
+		asm("nop");
+ 32a:	00 00       	nop
+	return crc;
+}
+
+void putchar (char c)
+{
+	while (!(UCSR0A&(1<<UDRE0)))
+ 32c:	80 91 c0 00 	lds	r24, 0x00C0
+ 330:	85 ff       	sbrs	r24, 5
+ 332:	fb cf       	rjmp	.-10     	; 0x32a <xModemReceiver+0xc8>
+		asm("nop");
+	UDR0 = c;
+ 334:	86 e0       	ldi	r24, 0x06	; 6
+ 336:	80 93 c6 00 	sts	0x00C6, r24
+ 33a:	01 c0       	rjmp	.+2      	; 0x33e <xModemReceiver+0xdc>
+}
+
+void putchar (char c)
+{
+	while (!(UCSR0A&(1<<UDRE0)))
+		asm("nop");
+ 33c:	00 00       	nop
+	return crc;
+}
+
+void putchar (char c)
+{
+	while (!(UCSR0A&(1<<UDRE0)))
+ 33e:	80 91 c0 00 	lds	r24, 0x00C0
+ 342:	85 ff       	sbrs	r24, 5
+ 344:	fb cf       	rjmp	.-10     	; 0x33c <xModemReceiver+0xda>
+		asm("nop");
+	UDR0 = c;
+ 346:	86 e0       	ldi	r24, 0x06	; 6
+ 348:	80 93 c6 00 	sts	0x00C6, r24
+				if (j==XMODEM_EOT)
+				{
+					putchar(XMODEM_ACK);
+					putchar(XMODEM_ACK);
+					putchar(XMODEM_ACK);
+					LED_OFF();
+ 34c:	41 98       	cbi	0x08, 1	; 8
+ 34e:	c9 c0       	rjmp	.+402    	; 0x4e2 <xModemReceiver+0x280>
+					return;
+				}
+				break;
+			case XMODEM_ST_FN:
+				if (j==frameNumber)
+ 350:	70 17       	cp	r23, r16
+ 352:	09 f0       	breq	.+2      	; 0x356 <xModemReceiver+0xf4>
+ 354:	a5 c0       	rjmp	.+330    	; 0x4a0 <xModemReceiver+0x23e>
+ 356:	62 e0       	ldi	r22, 0x02	; 2
+ 358:	a4 c0       	rjmp	.+328    	; 0x4a2 <xModemReceiver+0x240>
+					state = XMODEM_ST_IFN;
+				else 
+					state = XMODEM_ST_ERR;
+				break;
+			case XMODEM_ST_IFN:
+				if ((j^frameNumber)==0xff)
+ 35a:	70 27       	eor	r23, r16
+ 35c:	7f 3f       	cpi	r23, 0xFF	; 255
+ 35e:	09 f0       	breq	.+2      	; 0x362 <xModemReceiver+0x100>
+ 360:	9f c0       	rjmp	.+318    	; 0x4a0 <xModemReceiver+0x23e>
+ 362:	10 e0       	ldi	r17, 0x00	; 0
+ 364:	63 e0       	ldi	r22, 0x03	; 3
+ 366:	20 e0       	ldi	r18, 0x00	; 0
+ 368:	30 e0       	ldi	r19, 0x00	; 0
+ 36a:	9b c0       	rjmp	.+310    	; 0x4a2 <xModemReceiver+0x240>
+				}
+				else 
+					state = XMODEM_ST_ERR;
+				break;
+			case XMODEM_ST_RX:
+				xModemBuffer[index++]=j;
+ 36c:	e1 2f       	mov	r30, r17
+ 36e:	f0 e0       	ldi	r31, 0x00	; 0
+ 370:	e0 50       	subi	r30, 0x00	; 0
+ 372:	ff 4f       	sbci	r31, 0xFF	; 255
+ 374:	70 83       	st	Z, r23
+ 376:	1f 5f       	subi	r17, 0xFF	; 255
+ 378:	48 e0       	ldi	r20, 0x08	; 8
+ 37a:	50 e0       	ldi	r21, 0x00	; 0
+ 37c:	1d c0       	rjmp	.+58     	; 0x3b8 <xModemReceiver+0x156>
+ 37e:	c9 01       	movw	r24, r18
+ 380:	88 0f       	add	r24, r24
+ 382:	99 1f       	adc	r25, r25
+uint16_t calcCRC(char c, unsigned short crc)
+{
+	for (int count=8; --count>=0;)
+	{
+		
+		if (crc & 0x8000) 
+ 384:	37 ff       	sbrs	r19, 7
+ 386:	0d c0       	rjmp	.+26     	; 0x3a2 <xModemReceiver+0x140>
+		{
+			crc <<= 1;
+			crc += ((c&0x80)?1:0);
+			crc ^= 0x1021;
+ 388:	27 2f       	mov	r18, r23
+ 38a:	33 27       	eor	r19, r19
+ 38c:	27 fd       	sbrc	r18, 7
+ 38e:	30 95       	com	r19
+ 390:	22 27       	eor	r18, r18
+ 392:	33 0f       	add	r19, r19
+ 394:	22 1f       	adc	r18, r18
+ 396:	33 27       	eor	r19, r19
+ 398:	28 0f       	add	r18, r24
+ 39a:	39 1f       	adc	r19, r25
+ 39c:	2e 25       	eor	r18, r14
+ 39e:	3f 25       	eor	r19, r15
+ 3a0:	0a c0       	rjmp	.+20     	; 0x3b6 <xModemReceiver+0x154>
+		}
+		else
+		{
+			crc <<= 1;
+			crc += ((c&0x80)?1:0);
+ 3a2:	27 2f       	mov	r18, r23
+ 3a4:	33 27       	eor	r19, r19
+ 3a6:	27 fd       	sbrc	r18, 7
+ 3a8:	30 95       	com	r19
+ 3aa:	22 27       	eor	r18, r18
+ 3ac:	33 0f       	add	r19, r19
+ 3ae:	22 1f       	adc	r18, r18
+ 3b0:	33 27       	eor	r19, r19
+ 3b2:	28 0f       	add	r18, r24
+ 3b4:	39 1f       	adc	r19, r25
+		}
+		c<<=1;
+ 3b6:	77 0f       	add	r23, r23
+}
+
+/* CRC algorithm */
+uint16_t calcCRC(char c, unsigned short crc)
+{
+	for (int count=8; --count>=0;)
+ 3b8:	41 50       	subi	r20, 0x01	; 1
+ 3ba:	50 40       	sbci	r21, 0x00	; 0
+ 3bc:	8f ef       	ldi	r24, 0xFF	; 255
+ 3be:	4f 3f       	cpi	r20, 0xFF	; 255
+ 3c0:	58 07       	cpc	r21, r24
+ 3c2:	e9 f6       	brne	.-70     	; 0x37e <xModemReceiver+0x11c>
+					state = XMODEM_ST_ERR;
+				break;
+			case XMODEM_ST_RX:
+				xModemBuffer[index++]=j;
+				crc = calcCRC(j,crc);
+				if (index==128)
+ 3c4:	10 38       	cpi	r17, 0x80	; 128
+ 3c6:	09 f0       	breq	.+2      	; 0x3ca <xModemReceiver+0x168>
+ 3c8:	6c c0       	rjmp	.+216    	; 0x4a2 <xModemReceiver+0x240>
+ 3ca:	64 e0       	ldi	r22, 0x04	; 4
+ 3cc:	6a c0       	rjmp	.+212    	; 0x4a2 <xModemReceiver+0x240>
+ 3ce:	c9 01       	movw	r24, r18
+ 3d0:	88 0f       	add	r24, r24
+ 3d2:	99 1f       	adc	r25, r25
+uint16_t calcCRC(char c, unsigned short crc)
+{
+	for (int count=8; --count>=0;)
+	{
+		
+		if (crc & 0x8000) 
+ 3d4:	37 ff       	sbrs	r19, 7
+ 3d6:	0d c0       	rjmp	.+26     	; 0x3f2 <xModemReceiver+0x190>
+		{
+			crc <<= 1;
+			crc += ((c&0x80)?1:0);
+			crc ^= 0x1021;
+ 3d8:	27 2f       	mov	r18, r23
+ 3da:	33 27       	eor	r19, r19
+ 3dc:	27 fd       	sbrc	r18, 7
+ 3de:	30 95       	com	r19
+ 3e0:	22 27       	eor	r18, r18
+ 3e2:	33 0f       	add	r19, r19
+ 3e4:	22 1f       	adc	r18, r18
+ 3e6:	33 27       	eor	r19, r19
+ 3e8:	28 0f       	add	r18, r24
+ 3ea:	39 1f       	adc	r19, r25
+ 3ec:	2e 25       	eor	r18, r14
+ 3ee:	3f 25       	eor	r19, r15
+ 3f0:	0a c0       	rjmp	.+20     	; 0x406 <xModemReceiver+0x1a4>
+		}
+		else
+		{
+			crc <<= 1;
+			crc += ((c&0x80)?1:0);
+ 3f2:	27 2f       	mov	r18, r23
+ 3f4:	33 27       	eor	r19, r19
+ 3f6:	27 fd       	sbrc	r18, 7
+ 3f8:	30 95       	com	r19
+ 3fa:	22 27       	eor	r18, r18
+ 3fc:	33 0f       	add	r19, r19
+ 3fe:	22 1f       	adc	r18, r18
+ 400:	33 27       	eor	r19, r19
+ 402:	28 0f       	add	r18, r24
+ 404:	39 1f       	adc	r19, r25
+		}
+		c<<=1;
+ 406:	77 0f       	add	r23, r23
+}
+
+/* CRC algorithm */
+uint16_t calcCRC(char c, unsigned short crc)
+{
+	for (int count=8; --count>=0;)
+ 408:	41 50       	subi	r20, 0x01	; 1
+ 40a:	50 40       	sbci	r21, 0x00	; 0
+ 40c:	8f ef       	ldi	r24, 0xFF	; 255
+ 40e:	4f 3f       	cpi	r20, 0xFF	; 255
+ 410:	58 07       	cpc	r21, r24
+ 412:	e9 f6       	brne	.-70     	; 0x3ce <xModemReceiver+0x16c>
+ 414:	65 e0       	ldi	r22, 0x05	; 5
+ 416:	45 c0       	rjmp	.+138    	; 0x4a2 <xModemReceiver+0x240>
+ 418:	c9 01       	movw	r24, r18
+ 41a:	88 0f       	add	r24, r24
+ 41c:	99 1f       	adc	r25, r25
+	{
+		
+		if (crc & 0x8000) 
+ 41e:	37 ff       	sbrs	r19, 7
+ 420:	0d c0       	rjmp	.+26     	; 0x43c <xModemReceiver+0x1da>
+		{
+			crc <<= 1;
+			crc += ((c&0x80)?1:0);
+			crc ^= 0x1021;
+ 422:	27 2f       	mov	r18, r23
+ 424:	33 27       	eor	r19, r19
+ 426:	27 fd       	sbrc	r18, 7
+ 428:	30 95       	com	r19
+ 42a:	22 27       	eor	r18, r18
+ 42c:	33 0f       	add	r19, r19
+ 42e:	22 1f       	adc	r18, r18
+ 430:	33 27       	eor	r19, r19
+ 432:	28 0f       	add	r18, r24
+ 434:	39 1f       	adc	r19, r25
+ 436:	2e 25       	eor	r18, r14
+ 438:	3f 25       	eor	r19, r15
+ 43a:	0a c0       	rjmp	.+20     	; 0x450 <xModemReceiver+0x1ee>
+		}
+		else
+		{
+			crc <<= 1;
+			crc += ((c&0x80)?1:0);
+ 43c:	27 2f       	mov	r18, r23
+ 43e:	33 27       	eor	r19, r19
+ 440:	27 fd       	sbrc	r18, 7
+ 442:	30 95       	com	r19
+ 444:	22 27       	eor	r18, r18
+ 446:	33 0f       	add	r19, r19
+ 448:	22 1f       	adc	r18, r18
+ 44a:	33 27       	eor	r19, r19
+ 44c:	28 0f       	add	r18, r24
+ 44e:	39 1f       	adc	r19, r25
+		}
+		c<<=1;
+ 450:	77 0f       	add	r23, r23
+}
+
+/* CRC algorithm */
+uint16_t calcCRC(char c, unsigned short crc)
+{
+	for (int count=8; --count>=0;)
+ 452:	41 50       	subi	r20, 0x01	; 1
+ 454:	50 40       	sbci	r21, 0x00	; 0
+ 456:	8f ef       	ldi	r24, 0xFF	; 255
+ 458:	4f 3f       	cpi	r20, 0xFF	; 255
+ 45a:	58 07       	cpc	r21, r24
+ 45c:	e9 f6       	brne	.-70     	; 0x418 <xModemReceiver+0x1b6>
+				crc = calcCRC(j,crc);
+				state = XMODEM_ST_CRC2;
+				break;
+			case XMODEM_ST_CRC2:
+				crc = calcCRC(j,crc);
+				if (crc == 0)
+ 45e:	21 15       	cp	r18, r1
+ 460:	31 05       	cpc	r19, r1
+ 462:	b9 f4       	brne	.+46     	; 0x492 <xModemReceiver+0x230>
+				{
+					frameNumber++;
+					/* write bytes */
+					writeFlash(xModemBuffer,flashIndex,128);
+ 464:	ae 01       	movw	r20, r28
+ 466:	60 e0       	ldi	r22, 0x00	; 0
+ 468:	70 e0       	ldi	r23, 0x00	; 0
+ 46a:	80 e0       	ldi	r24, 0x00	; 0
+ 46c:	91 e0       	ldi	r25, 0x01	; 1
+ 46e:	20 e8       	ldi	r18, 0x80	; 128
+ 470:	69 de       	rcall	.-814    	; 0x144 <writeFlash>
+ 472:	01 c0       	rjmp	.+2      	; 0x476 <xModemReceiver+0x214>
+}
+
+void putchar (char c)
+{
+	while (!(UCSR0A&(1<<UDRE0)))
+		asm("nop");
+ 474:	00 00       	nop
+	return crc;
+}
+
+void putchar (char c)
+{
+	while (!(UCSR0A&(1<<UDRE0)))
+ 476:	80 91 c0 00 	lds	r24, 0x00C0
+ 47a:	85 ff       	sbrs	r24, 5
+ 47c:	fb cf       	rjmp	.-10     	; 0x474 <xModemReceiver+0x212>
+				break;
+			case XMODEM_ST_CRC2:
+				crc = calcCRC(j,crc);
+				if (crc == 0)
+				{
+					frameNumber++;
+ 47e:	0f 5f       	subi	r16, 0xFF	; 255
+
+void putchar (char c)
+{
+	while (!(UCSR0A&(1<<UDRE0)))
+		asm("nop");
+	UDR0 = c;
+ 480:	d0 92 c6 00 	sts	0x00C6, r13
+				{
+					frameNumber++;
+					/* write bytes */
+					writeFlash(xModemBuffer,flashIndex,128);
+					putchar(XMODEM_ACK);
+					flashIndex+=128;
+ 484:	c0 58       	subi	r28, 0x80	; 128
+ 486:	df 4f       	sbci	r29, 0xFF	; 255
+ 488:	20 e0       	ldi	r18, 0x00	; 0
+ 48a:	30 e0       	ldi	r19, 0x00	; 0
+ 48c:	60 e0       	ldi	r22, 0x00	; 0
+ 48e:	09 c0       	rjmp	.+18     	; 0x4a2 <xModemReceiver+0x240>
+}
+
+void putchar (char c)
+{
+	while (!(UCSR0A&(1<<UDRE0)))
+		asm("nop");
+ 490:	00 00       	nop
+	return crc;
+}
+
+void putchar (char c)
+{
+	while (!(UCSR0A&(1<<UDRE0)))
+ 492:	80 91 c0 00 	lds	r24, 0x00C0
+ 496:	85 ff       	sbrs	r24, 5
+ 498:	fb cf       	rjmp	.-10     	; 0x490 <xModemReceiver+0x22e>
+		asm("nop");
+	UDR0 = c;
+ 49a:	c0 92 c6 00 	sts	0x00C6, r12
+ 49e:	f6 cf       	rjmp	.-20     	; 0x48c <xModemReceiver+0x22a>
+ 4a0:	66 e0       	ldi	r22, 0x06	; 6
+ 4a2:	40 e0       	ldi	r20, 0x00	; 0
+ 4a4:	50 e0       	ldi	r21, 0x00	; 0
+{
+	uint16_t i;
+	for (i=0; i<(FRAME_RATE*((uint16_t)t));)
+	{
+		/* check the uart */
+		if (UCSR0A&(1<<RXC0))
+ 4a6:	80 91 c0 00 	lds	r24, 0x00C0
+ 4aa:	87 ff       	sbrs	r24, 7
+ 4ac:	03 c0       	rjmp	.+6      	; 0x4b4 <xModemReceiver+0x252>
+		{
+			/* we have a byte */
+			(*c) = UDR0;
+ 4ae:	70 91 c6 00 	lds	r23, 0x00C6
+ 4b2:	12 cf       	rjmp	.-476    	; 0x2d8 <xModemReceiver+0x76>
+			return 1;
+		}
+		//waitForTimer();
+		if (TIFR1&(1<<OCF1A))
+ 4b4:	b1 9b       	sbis	0x16, 1	; 22
+ 4b6:	f7 cf       	rjmp	.-18     	; 0x4a6 <xModemReceiver+0x244>
+		{
+			i++;
+ 4b8:	4f 5f       	subi	r20, 0xFF	; 255
+ 4ba:	5f 4f       	sbci	r21, 0xFF	; 255
+			TIFR1 |= (1<<OCF1A);
+ 4bc:	b1 9a       	sbi	0x16, 1	; 22
+   returns 0 on timeout, 1 on success
+*/
+uint8_t receiveChar (uint8_t *c, uint8_t t)
+{
+	uint16_t i;
+	for (i=0; i<(FRAME_RATE*((uint16_t)t));)
+ 4be:	44 36       	cpi	r20, 0x64	; 100
+ 4c0:	51 05       	cpc	r21, r1
+ 4c2:	88 f3       	brcs	.-30     	; 0x4a6 <xModemReceiver+0x244>
+ 4c4:	01 c0       	rjmp	.+2      	; 0x4c8 <xModemReceiver+0x266>
+}
+
+void putchar (char c)
+{
+	while (!(UCSR0A&(1<<UDRE0)))
+		asm("nop");
+ 4c6:	00 00       	nop
+	return crc;
+}
+
+void putchar (char c)
+{
+	while (!(UCSR0A&(1<<UDRE0)))
+ 4c8:	80 91 c0 00 	lds	r24, 0x00C0
+ 4cc:	85 ff       	sbrs	r24, 5
+ 4ce:	fb cf       	rjmp	.-10     	; 0x4c6 <xModemReceiver+0x264>
+		asm("nop");
+	UDR0 = c;
+ 4d0:	85 e1       	ldi	r24, 0x15	; 21
+ 4d2:	80 93 c6 00 	sts	0x00C6, r24
+ 4d6:	05 c0       	rjmp	.+10     	; 0x4e2 <xModemReceiver+0x280>
+	/* clear the uart receive buffer */
+	i = UDR0;
+	j = UDR0;
+
+	/* start transfer by sending an C */
+	for (i=0; i<10; i++)
+ 4d8:	9f 5f       	subi	r25, 0xFF	; 255
+ 4da:	9a 30       	cpi	r25, 0x0A	; 10
+ 4dc:	08 f4       	brcc	.+2      	; 0x4e0 <xModemReceiver+0x27e>
+ 4de:	d2 ce       	rjmp	.-604    	; 0x284 <xModemReceiver+0x22>
+ 4e0:	e9 ce       	rjmp	.-558    	; 0x2b4 <xModemReceiver+0x52>
+		}
+
+	}
+	
+	
+}
+ 4e2:	df 91       	pop	r29
+ 4e4:	cf 91       	pop	r28
+ 4e6:	1f 91       	pop	r17
+ 4e8:	0f 91       	pop	r16
+ 4ea:	ff 90       	pop	r15
+ 4ec:	ef 90       	pop	r14
+ 4ee:	df 90       	pop	r13
+ 4f0:	cf 90       	pop	r12
+ 4f2:	08 95       	ret
+
+000004f4 <receiveChar>:
+   c - to store the received char
+   t - timeout in seconds
+   returns 0 on timeout, 1 on success
+*/
+uint8_t receiveChar (uint8_t *c, uint8_t t)
+{
+ 4f4:	fc 01       	movw	r30, r24
+	uint16_t i;
+	for (i=0; i<(FRAME_RATE*((uint16_t)t));)
+ 4f6:	84 e6       	ldi	r24, 0x64	; 100
+ 4f8:	68 9f       	mul	r22, r24
+ 4fa:	a0 01       	movw	r20, r0
+ 4fc:	11 24       	eor	r1, r1
+ 4fe:	20 e0       	ldi	r18, 0x00	; 0
+ 500:	30 e0       	ldi	r19, 0x00	; 0
+ 502:	0e c0       	rjmp	.+28     	; 0x520 <__stack+0x21>
+	{
+		/* check the uart */
+		if (UCSR0A&(1<<RXC0))
+ 504:	80 91 c0 00 	lds	r24, 0x00C0
+ 508:	87 ff       	sbrs	r24, 7
+ 50a:	05 c0       	rjmp	.+10     	; 0x516 <__stack+0x17>
+		{
+			/* we have a byte */
+			(*c) = UDR0;
+ 50c:	80 91 c6 00 	lds	r24, 0x00C6
+ 510:	80 83       	st	Z, r24
+ 512:	81 e0       	ldi	r24, 0x01	; 1
+ 514:	08 95       	ret
+			return 1;
+		}
+		//waitForTimer();
+		if (TIFR1&(1<<OCF1A))
+ 516:	b1 9b       	sbis	0x16, 1	; 22
+ 518:	f5 cf       	rjmp	.-22     	; 0x504 <__stack+0x5>
+		{
+			i++;
+ 51a:	2f 5f       	subi	r18, 0xFF	; 255
+ 51c:	3f 4f       	sbci	r19, 0xFF	; 255
+			TIFR1 |= (1<<OCF1A);
+ 51e:	b1 9a       	sbi	0x16, 1	; 22
+   returns 0 on timeout, 1 on success
+*/
+uint8_t receiveChar (uint8_t *c, uint8_t t)
+{
+	uint16_t i;
+	for (i=0; i<(FRAME_RATE*((uint16_t)t));)
+ 520:	24 17       	cp	r18, r20
+ 522:	35 07       	cpc	r19, r21
+ 524:	78 f3       	brcs	.-34     	; 0x504 <__stack+0x5>
+ 526:	80 e0       	ldi	r24, 0x00	; 0
+			i++;
+			TIFR1 |= (1<<OCF1A);
+		}
+	}
+	return 0;
+}
+ 528:	08 95       	ret
+
+0000052a <writeRegs>:
+
+/* transfer one line to the relais driver shift regs */
+void writeRegs (const unsigned char *d)
+{
+ 52a:	ac 01       	movw	r20, r24
+	unsigned char uch;	
+	// setup correct spi mode
+	CLR_LOAD();
+ 52c:	5d 9a       	sbi	0x0b, 5	; 11
+	SPCR = (0<<SPIE) | (1<<SPE) | (0<<DORD) | (1<<MSTR) | (1<<CPOL) | (0<<CPHA) | (1<<SPR1) | (1<<SPR0);
+ 52e:	8b e5       	ldi	r24, 0x5B	; 91
+ 530:	8c bd       	out	0x2c, r24	; 44
+	SPSR = 0;
+ 532:	1d bc       	out	0x2d, r1	; 45
+ 534:	20 e0       	ldi	r18, 0x00	; 0
+ 536:	30 e0       	ldi	r19, 0x00	; 0
+	for (unsigned char i=0;i<LINE_LENGTH;i++)
+	{
+		uch = spiTransfer(d[i]);	
+ 538:	fa 01       	movw	r30, r20
+ 53a:	e2 0f       	add	r30, r18
+ 53c:	f3 1f       	adc	r31, r19
+ 53e:	80 81       	ld	r24, Z
+}
+
+/* send a byte per spi, the received data is returned */
+uint8_t spiTransfer (uint8_t d)
+{
+	SPDR = d;
+ 540:	8e bd       	out	0x2e, r24	; 46
+ 542:	01 c0       	rjmp	.+2      	; 0x546 <writeRegs+0x1c>
+		while (!(SPSR&(1<<SPIF)))
+			asm("nop");
+ 544:	00 00       	nop
+
+/* send a byte per spi, the received data is returned */
+uint8_t spiTransfer (uint8_t d)
+{
+	SPDR = d;
+		while (!(SPSR&(1<<SPIF)))
+ 546:	0d b4       	in	r0, 0x2d	; 45
+ 548:	07 fe       	sbrs	r0, 7
+ 54a:	fc cf       	rjmp	.-8      	; 0x544 <writeRegs+0x1a>
+			asm("nop");
+	return (SPDR);
+ 54c:	8e b5       	in	r24, 0x2e	; 46
+ 54e:	2f 5f       	subi	r18, 0xFF	; 255
+ 550:	3f 4f       	sbci	r19, 0xFF	; 255
+	unsigned char uch;	
+	// setup correct spi mode
+	CLR_LOAD();
+	SPCR = (0<<SPIE) | (1<<SPE) | (0<<DORD) | (1<<MSTR) | (1<<CPOL) | (0<<CPHA) | (1<<SPR1) | (1<<SPR0);
+	SPSR = 0;
+	for (unsigned char i=0;i<LINE_LENGTH;i++)
+ 552:	2c 30       	cpi	r18, 0x0C	; 12
+ 554:	31 05       	cpc	r19, r1
+ 556:	81 f7       	brne	.-32     	; 0x538 <writeRegs+0xe>
+	{
+		uch = spiTransfer(d[i]);	
+	}
+	SET_LOAD();
+ 558:	5d 98       	cbi	0x0b, 5	; 11
+	
+}
+ 55a:	08 95       	ret
+
+0000055c <spiTransfer>:
+
+/* send a byte per spi, the received data is returned */
+uint8_t spiTransfer (uint8_t d)
+{
+	SPDR = d;
+ 55c:	8e bd       	out	0x2e, r24	; 46
+ 55e:	01 c0       	rjmp	.+2      	; 0x562 <spiTransfer+0x6>
+		while (!(SPSR&(1<<SPIF)))
+			asm("nop");
+ 560:	00 00       	nop
+
+/* send a byte per spi, the received data is returned */
+uint8_t spiTransfer (uint8_t d)
+{
+	SPDR = d;
+		while (!(SPSR&(1<<SPIF)))
+ 562:	0d b4       	in	r0, 0x2d	; 45
+ 564:	07 fe       	sbrs	r0, 7
+ 566:	fc cf       	rjmp	.-8      	; 0x560 <spiTransfer+0x4>
+			asm("nop");
+	return (SPDR);
+ 568:	8e b5       	in	r24, 0x2e	; 46
+}
+ 56a:	08 95       	ret
+
+0000056c <init>:
+
+
+void init()
+{
+	CLR_LOAD();
+ 56c:	5d 9a       	sbi	0x0b, 5	; 11
+
+	/* setup timer 2: ctc 10ms, div by 64 prescaler */
+	OCR1A  = (F_CPU/(64*FRAME_RATE));
+ 56e:	84 ec       	ldi	r24, 0xC4	; 196
+ 570:	99 e0       	ldi	r25, 0x09	; 9
+ 572:	90 93 89 00 	sts	0x0089, r25
+ 576:	80 93 88 00 	sts	0x0088, r24
+	TIMSK1 = 0;	
+ 57a:	10 92 6f 00 	sts	0x006F, r1
+	TCCR1A = (0<<WGM11) | (0<<WGM10);
+ 57e:	10 92 80 00 	sts	0x0080, r1
+	TCCR1B = (0<<WGM13) | (1<<WGM12) | (0<<CS22) | (1<<CS21) | (1<<CS20);
+ 582:	8b e0       	ldi	r24, 0x0B	; 11
+ 584:	80 93 81 00 	sts	0x0081, r24
+	
+	/* init uart: 28800 baud, 8 data bits, 1 stop bit, no parity */
+	UCSR0A = (0<<U2X0);
+ 588:	10 92 c0 00 	sts	0x00C0, r1
+	UCSR0B = (1<<RXEN0) | (1<<TXEN0);
+ 58c:	88 e1       	ldi	r24, 0x18	; 24
+ 58e:	80 93 c1 00 	sts	0x00C1, r24
+	UCSR0C = (1<<UCSZ01) | (1<<UCSZ00);
+ 592:	86 e0       	ldi	r24, 0x06	; 6
+ 594:	80 93 c2 00 	sts	0x00C2, r24
+	UBRR0 = 51;
+ 598:	83 e3       	ldi	r24, 0x33	; 51
+ 59a:	90 e0       	ldi	r25, 0x00	; 0
+ 59c:	90 93 c5 00 	sts	0x00C5, r25
+ 5a0:	80 93 c4 00 	sts	0x00C4, r24
+	
+	DDRD = (1<<7) | (1<<5);
+ 5a4:	80 ea       	ldi	r24, 0xA0	; 160
+ 5a6:	8a b9       	out	0x0a, r24	; 10
+	DDRB = (1<<5) | (1<<3) | (1<<1);
+ 5a8:	8a e2       	ldi	r24, 0x2A	; 42
+ 5aa:	84 b9       	out	0x04, r24	; 4
+	DDRC = (1<<1);	// led output
+ 5ac:	82 e0       	ldi	r24, 0x02	; 2
+ 5ae:	87 b9       	out	0x07, r24	; 7
+	
+	/* default: all ports with pull ups */
+	PORTB = 0xff;
+ 5b0:	8f ef       	ldi	r24, 0xFF	; 255
+ 5b2:	85 b9       	out	0x05, r24	; 5
+	PORTC = 0xff;
+ 5b4:	88 b9       	out	0x08, r24	; 8
+	PORTD = 0xff;
+ 5b6:	8b b9       	out	0x0b, r24	; 11
+	
+	SET_FLASH_CS();
+ 5b8:	29 9a       	sbi	0x05, 1	; 5
+	SET_FLASH_HOLD();
+ 5ba:	5f 9a       	sbi	0x0b, 7	; 11
+	
+	LED_OFF();
+ 5bc:	41 98       	cbi	0x08, 1	; 8
+}
+ 5be:	08 95       	ret
+
+000005c0 <main>:
+/**********************************************************************************************************
+*   I M P L E M E N T A T I O N
+*/
+
+int main (void)
+{
+ 5c0:	4f 92       	push	r4
+ 5c2:	5f 92       	push	r5
+ 5c4:	6f 92       	push	r6
+ 5c6:	7f 92       	push	r7
+ 5c8:	9f 92       	push	r9
+ 5ca:	af 92       	push	r10
+ 5cc:	bf 92       	push	r11
+ 5ce:	cf 92       	push	r12
+ 5d0:	df 92       	push	r13
+ 5d2:	ef 92       	push	r14
+ 5d4:	ff 92       	push	r15
+ 5d6:	0f 93       	push	r16
+ 5d8:	1f 93       	push	r17
+ 5da:	df 93       	push	r29
+ 5dc:	cf 93       	push	r28
+ 5de:	cd b7       	in	r28, 0x3d	; 61
+ 5e0:	de b7       	in	r29, 0x3e	; 62
+ 5e2:	2e 97       	sbiw	r28, 0x0e	; 14
+ 5e4:	0f b6       	in	r0, 0x3f	; 63
+ 5e6:	f8 94       	cli
+ 5e8:	de bf       	out	0x3e, r29	; 62
+ 5ea:	0f be       	out	0x3f, r0	; 63
+ 5ec:	cd bf       	out	0x3d, r28	; 61
+	/* one data frame to send to the relais */
+	unsigned char data[LINE_LENGTH] = {0x00};
+ 5ee:	8e 01       	movw	r16, r28
+ 5f0:	0d 5f       	subi	r16, 0xFD	; 253
+ 5f2:	1f 4f       	sbci	r17, 0xFF	; 255
+ 5f4:	8c e0       	ldi	r24, 0x0C	; 12
+ 5f6:	f8 01       	movw	r30, r16
+ 5f8:	11 92       	st	Z+, r1
+ 5fa:	8a 95       	dec	r24
+ 5fc:	e9 f7       	brne	.-6      	; 0x5f8 <main+0x38>
+
+	uint16_t cycle=0, numCycles=0;
+	/* initalize the hardware components */
+	init();
+ 5fe:	b6 df       	rcall	.-148    	; 0x56c <init>
+ 600:	ee 24       	eor	r14, r14
+ 602:	ff 24       	eor	r15, r15
+ 604:	cc 24       	eor	r12, r12
+ 606:	dd 24       	eor	r13, r13
+ 608:	99 24       	eor	r9, r9
+		{
+			cycle = 0;
+			/* read the number of cycles from the flash */
+			uint8_t buf[2];
+			/* the first to locations of the flash hold the number of valid lines (=cycles) in the flash */
+			if (readFlash(buf, 0, 2))
+ 60a:	2e 01       	movw	r4, r28
+ 60c:	08 94       	sec
+ 60e:	41 1c       	adc	r4, r1
+ 610:	51 1c       	adc	r5, r1
+			ledCnt = 0;
+		else
+			ledCnt++;
+		
+		/* try to read one line of data from the flash */
+		if (readLine(data, cycle)==0)
+ 612:	58 01       	movw	r10, r16
+		{
+			/* read failed, send zero */
+			for (i=0; i<LINE_LENGTH; i++)
+ 614:	2f e0       	ldi	r18, 0x0F	; 15
+ 616:	62 2e       	mov	r6, r18
+ 618:	71 2c       	mov	r7, r1
+ 61a:	6c 0e       	add	r6, r28
+ 61c:	7d 1e       	adc	r7, r29
+
+	uint8_t ledCnt=0;
+	uint8_t i;
+	for(cycle=0;1;cycle++)
+	{
+		if (cycle>=numCycles)	/* note: we need a >= here as numCycles may change unexpectedly */
+ 61e:	ec 14       	cp	r14, r12
+ 620:	fd 04       	cpc	r15, r13
+ 622:	b0 f0       	brcs	.+44     	; 0x650 <main+0x90>
+		{
+			cycle = 0;
+			/* read the number of cycles from the flash */
+			uint8_t buf[2];
+			/* the first to locations of the flash hold the number of valid lines (=cycles) in the flash */
+			if (readFlash(buf, 0, 2))
+ 624:	c2 01       	movw	r24, r4
+ 626:	40 e0       	ldi	r20, 0x00	; 0
+ 628:	50 e0       	ldi	r21, 0x00	; 0
+ 62a:	60 e0       	ldi	r22, 0x00	; 0
+ 62c:	70 e0       	ldi	r23, 0x00	; 0
+ 62e:	22 e0       	ldi	r18, 0x02	; 2
+ 630:	23 dd       	rcall	.-1466   	; 0x78 <readFlash>
+ 632:	88 23       	and	r24, r24
+ 634:	29 f4       	brne	.+10     	; 0x640 <main+0x80>
+ 636:	ee 24       	eor	r14, r14
+ 638:	ff 24       	eor	r15, r15
+ 63a:	cc 24       	eor	r12, r12
+ 63c:	dd 24       	eor	r13, r13
+ 63e:	08 c0       	rjmp	.+16     	; 0x650 <main+0x90>
+				numCycles = (((uint16_t)buf[0])<<8) + buf[1];
+ 640:	19 81       	ldd	r17, Y+1	; 0x01
+ 642:	00 e0       	ldi	r16, 0x00	; 0
+ 644:	8a 81       	ldd	r24, Y+2	; 0x02
+ 646:	68 01       	movw	r12, r16
+ 648:	c8 0e       	add	r12, r24
+ 64a:	d1 1c       	adc	r13, r1
+ 64c:	ee 24       	eor	r14, r14
+ 64e:	ff 24       	eor	r15, r15
+			else
+				numCycles = 0;
+		}
+		
+		// check if the push button was pressed
+		if (!GET_PUSH_BUTTON())
+ 650:	30 99       	sbic	0x06, 0	; 6
+ 652:	0b c0       	rjmp	.+22     	; 0x66a <main+0xaa>
+ 654:	f5 01       	movw	r30, r10
+		{
+			/* the button was pressed */
+			/* turn off all valves */
+			for (i=0; i<LINE_LENGTH; i++)
+				data[i] = 0;
+ 656:	11 92       	st	Z+, r1
+		// check if the push button was pressed
+		if (!GET_PUSH_BUTTON())
+		{
+			/* the button was pressed */
+			/* turn off all valves */
+			for (i=0; i<LINE_LENGTH; i++)
+ 658:	e6 15       	cp	r30, r6
+ 65a:	f7 05       	cpc	r31, r7
+ 65c:	e1 f7       	brne	.-8      	; 0x656 <main+0x96>
+				data[i] = 0;
+			writeRegs(data);
+ 65e:	c5 01       	movw	r24, r10
+ 660:	64 df       	rcall	.-312    	; 0x52a <writeRegs>
+			
+			/* switch to xmodem receiver */
+			xModemReceiver();
+ 662:	ff dd       	rcall	.-1026   	; 0x262 <xModemReceiver>
+ 664:	cc 24       	eor	r12, r12
+ 666:	dd 24       	eor	r13, r13
+ 668:	1c c0       	rjmp	.+56     	; 0x6a2 <main+0xe2>
+			numCycles = 0;
+			continue;
+		}
+		
+		/* create a 1hz heart beat on the led */
+		if (ledCnt == 1)
+ 66a:	f1 e0       	ldi	r31, 0x01	; 1
+ 66c:	9f 16       	cp	r9, r31
+ 66e:	11 f4       	brne	.+4      	; 0x674 <main+0xb4>
+			LED_TOGGLE();
+ 670:	31 9a       	sbi	0x06, 1	; 6
+ 672:	05 c0       	rjmp	.+10     	; 0x67e <main+0xbe>
+		if (ledCnt == 49)
+ 674:	81 e3       	ldi	r24, 0x31	; 49
+ 676:	98 16       	cp	r9, r24
+ 678:	11 f4       	brne	.+4      	; 0x67e <main+0xbe>
+ 67a:	99 24       	eor	r9, r9
+ 67c:	01 c0       	rjmp	.+2      	; 0x680 <main+0xc0>
+			ledCnt = 0;
+		else
+			ledCnt++;
+ 67e:	93 94       	inc	r9
+		
+		/* try to read one line of data from the flash */
+		if (readLine(data, cycle)==0)
+ 680:	c5 01       	movw	r24, r10
+ 682:	b7 01       	movw	r22, r14
+ 684:	45 dd       	rcall	.-1398   	; 0x110 <readLine>
+ 686:	88 23       	and	r24, r24
+ 688:	39 f4       	brne	.+14     	; 0x698 <main+0xd8>
+ 68a:	f5 01       	movw	r30, r10
+		{
+			/* read failed, send zero */
+			for (i=0; i<LINE_LENGTH; i++)
+				data[i]=0;
+ 68c:	11 92       	st	Z+, r1
+		
+		/* try to read one line of data from the flash */
+		if (readLine(data, cycle)==0)
+		{
+			/* read failed, send zero */
+			for (i=0; i<LINE_LENGTH; i++)
+ 68e:	e6 15       	cp	r30, r6
+ 690:	f7 05       	cpc	r31, r7
+ 692:	e1 f7       	brne	.-8      	; 0x68c <main+0xcc>
+ 694:	01 c0       	rjmp	.+2      	; 0x698 <main+0xd8>
+}
+
+void waitForTimer()
+{
+	while(!(TIFR1&(1<<OCF1A)))
+		asm("nop");
+ 696:	00 00       	nop
+
+}
+
+void waitForTimer()
+{
+	while(!(TIFR1&(1<<OCF1A)))
+ 698:	b1 9b       	sbis	0x16, 1	; 22
+ 69a:	fd cf       	rjmp	.-6      	; 0x696 <main+0xd6>
+		asm("nop");
+	/* clear the flag */
+	TIFR1 |= (1<<OCF1A);
+ 69c:	b1 9a       	sbi	0x16, 1	; 22
+				
+		/* wait for a timeout (occures every 1/FRAME_RATE seconds) */
+		waitForTimer();
+		
+		/* send the frame to the relais */
+		writeRegs(data);
+ 69e:	c5 01       	movw	r24, r10
+ 6a0:	44 df       	rcall	.-376    	; 0x52a <writeRegs>
+	/* initalize the hardware components */
+	init();
+
+	uint8_t ledCnt=0;
+	uint8_t i;
+	for(cycle=0;1;cycle++)
+ 6a2:	08 94       	sec
+ 6a4:	e1 1c       	adc	r14, r1
+ 6a6:	f1 1c       	adc	r15, r1
+ 6a8:	ba cf       	rjmp	.-140    	; 0x61e <main+0x5e>
+
+000006aa <__mulsi3>:
+ 6aa:	62 9f       	mul	r22, r18
+ 6ac:	d0 01       	movw	r26, r0
+ 6ae:	73 9f       	mul	r23, r19
+ 6b0:	f0 01       	movw	r30, r0
+ 6b2:	82 9f       	mul	r24, r18
+ 6b4:	e0 0d       	add	r30, r0
+ 6b6:	f1 1d       	adc	r31, r1
+ 6b8:	64 9f       	mul	r22, r20
+ 6ba:	e0 0d       	add	r30, r0
+ 6bc:	f1 1d       	adc	r31, r1
+ 6be:	92 9f       	mul	r25, r18
+ 6c0:	f0 0d       	add	r31, r0
+ 6c2:	83 9f       	mul	r24, r19
+ 6c4:	f0 0d       	add	r31, r0
+ 6c6:	74 9f       	mul	r23, r20
+ 6c8:	f0 0d       	add	r31, r0
+ 6ca:	65 9f       	mul	r22, r21
+ 6cc:	f0 0d       	add	r31, r0
+ 6ce:	99 27       	eor	r25, r25
+ 6d0:	72 9f       	mul	r23, r18
+ 6d2:	b0 0d       	add	r27, r0
+ 6d4:	e1 1d       	adc	r30, r1
+ 6d6:	f9 1f       	adc	r31, r25
+ 6d8:	63 9f       	mul	r22, r19
+ 6da:	b0 0d       	add	r27, r0
+ 6dc:	e1 1d       	adc	r30, r1
+ 6de:	f9 1f       	adc	r31, r25
+ 6e0:	bd 01       	movw	r22, r26
+ 6e2:	cf 01       	movw	r24, r30
+ 6e4:	11 24       	eor	r1, r1
+ 6e6:	08 95       	ret
+
+000006e8 <_exit>:
+ 6e8:	f8 94       	cli
+
+000006ea <__stop_program>:
+ 6ea:	ff cf       	rjmp	.-2      	; 0x6ea <__stop_program>
