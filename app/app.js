@@ -17,9 +17,6 @@ function handler (request, response) {
 // accessible from the web
 var fileServer = new static.Server('./public');
 
-
-
-
 	
 // This is the port for our web server.
 // you will need to go to http://localhost:8124 to see it

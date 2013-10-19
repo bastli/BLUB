@@ -1,41 +1,57 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Node.js Multiplayer Drawing Game | Tutorialzine Demo</title>
-        
-        <!-- The stylesheets -->
-        <link rel="stylesheet" href="assets/css/styles.css" />
-        
-        <!--[if lt IE 9]>
-          <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
-    </head>
-    
-    <body>
-		<div id="cursors">
-	    	<!-- The mouse pointers will be created here -->
-		</div>
+  <head>
+	<title>BLUB by Bastli</title>
 
-		<canvas id="paper" width="1900" height="1000">
-			Your browser needs to support canvas for this to work!
-		</canvas>
-		
-		<hgroup id="instructions">		
-			<h1>Draw anywhere!</h1>
-			<h2>You will see everyone else who's doing the same.</h2>
-			<h3>Tip: if the stage gets dirty, simply reload the page</h3>
-		</hgroup>
-		
-        <footer>
-	        <h2><i>Tutorial:</i> Node.js Multiplayer Drawing Game</h2>
-            <a class="tzine" href="http://tutorialzine.com/2012/08/nodejs-drawing-game/">Head on to <i>Tutorial<b>zine</b></i> to read and download</a>
-        </footer>
-        
-        <!-- JavaScript includes. Notice that socket.io.js is served by node.js -->
-		<script src="/socket.io/socket.io.js"></script>
-		<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-		<script src="assets/js/script.js"></script>
-        
-    </body>
+	<link rel="icon" href="/assets/img/blub_icon.png" type="image/x-icon">
+	<link rel="apple-touch-icon" href="/assets/img/blub_icon.png"/>
+
+	<meta charset="utf-8" />
+	
+	<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+	<!-- Bootstrap -->
+	<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="../../assets/js/html5shiv.js"></script>
+	  <script src="../../assets/js/respond.min.js"></script>
+	<![endif]-->
+
+
+	<link href="assets/css/styles.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+	<header class="navbar navbar-fixed-top">
+		<div class="container">
+			<div class="row">
+				<div class="navbar-header col-sm-12 col-md-12">
+					<a href="/" class="navbar-brand"><img src="assets/img/blub.svg" alt="BLUB"></img></a>
+					<a href="http://www.bastli.ethz.ch" class="navbar-brand pull-right"><img src="assets/img/bastli_logo_square.svg" alt="AMIV Bastli"></img></a>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div id="cursors">
+			<!-- The mouse pointers will be created here -->
+	</div>
+
+	<canvas id="paper" width="1900" height="1000">
+		Your browser needs to support canvas for this to work!
+	</canvas>
+
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="//code.jquery.com/jquery.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+
+	<script src="/socket.io/socket.io.js"></script>
+	<!--<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>-->
+	<script src="assets/js/script.js"></script>
+  </body>
 </html>
