@@ -3,12 +3,11 @@
 #include "qdebug.h"
 //#include <stdint.h>
 #include <qextserialenumerator.h>
-//#include <QStringList>
-//#include <QProcess>
-//#include <QFileDialog>
+#include <QMessageBox>
+#include <QFileDialog>
 #include <QMessageBox>
 #include <QListWidgetItem>
-//#include <qwaitcondition.h>
+#include <QColor>
 
 const int MainWindow::LINE_LENGTH = 8;
 
@@ -29,9 +28,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(&delayTimer,SIGNAL(timeout()),this,SLOT(createBubbleLine()));
     connect(ui->boxPort,SIGNAL(currentIndexChanged(int)), this, SLOT(selectSerialPort(int)));
-    connect(ui->btnBubble, SIGNAL(clicked()), this, SLOT(createBubbleLine()));
+    connect(ui->btnBubble, SIGNAL(clicked()), this, SLOT(btnBubbleClicked()));
     connect(ui->chkBoxEnAuto, SIGNAL(toggled(bool)), this, SLOT(onChkEnAutoToggled(bool)));
     connect(ui->sliderFreq, SIGNAL(sliderMoved(int)), this, SLOT(onFreqSliderMoved(int)));
+    connect(ui->btnSelectFile, SIGNAL(clicked()), this, SLOT(selectImage()));
 
     // disable the graphical items
     //ui->listSerialLog->setDisabled(true);
@@ -60,13 +60,12 @@ MainWindow::MainWindow(QWidget *parent) :
     */
 }
 
-/*
+
 void MainWindow::selectImage()
 {
     QFileDialog dialog(this,"select test bitstream hex-file", ".");
     dialog.setModal(true);
-    dialog.setDefaultSuffix("hex");
-    dialog.selectFile(ui->lineTestHex->text());
+    dialog.setDefaultSuffix("png");
     dialog.exec();
     if (dialog.selectedFiles().length() != 1)
     {
@@ -74,14 +73,38 @@ void MainWindow::selectImage()
         QMessageBox::critical(this, "Error", "please select a hex file");
         return;
     }
-    ui->lineTestHex->setText(dialog.selectedFiles().at(0));
-    config->setValue("TestBitStreamHexFile",ui->lineTestHex->text());
-}*/
+    QString fn = dialog.selectedFiles().at(0);
+    ui->lineEditImageFn->setText(fn);
+    image = new QImage(fn);
+    if (image->width() > LINE_LENGTH*8)
+    {
+        QMessageBox::critical(this, "Image Error", "The selected image is too wide");
+        delete image;
+        image = NULL;
+    }
+    ui->chkBoxEnAuto->setChecked(false);
+    delayTimer.start();
+    delayTimer.setInterval(ui->sliderFreq->value());
+    rowCnt = 0;
+}
 
 MainWindow::~MainWindow()
 {
     delete ui;
     //delete config;
+}
+
+
+void MainWindow::btnBubbleClicked()
+{
+    // create a bubble by sending the according data
+    char data[LINE_LENGTH]; // = new uint8_t[LINE_LENGTH];
+
+    // create a row of bubbles
+    for (int i=0; i<LINE_LENGTH; i++)
+        data[i] = 0xFF; // turn all valves off
+
+    port->write(data, LINE_LENGTH);
 }
 
 // create a line of bubbles (in all channels)
@@ -90,12 +113,49 @@ void MainWindow::createBubbleLine()
     // create a bubble by sending the according data
     char data[LINE_LENGTH]; // = new uint8_t[LINE_LENGTH];
 
+
     for (int i=0; i<LINE_LENGTH; i++)
-        data[i] = 0xFF; // turn all valves on
+        data[i] = 0x00; // turn all valves off
+
+    if (ui->chkBoxEnAuto->checkState())
+    {
+        // create a row of bubbles
+        for (int i=0; i<LINE_LENGTH; i++)
+            data[i] = 0xFF; // turn all valves off
+    }
+    else
+    {
+        if (image != NULL)
+        {
+            int x = 0;
+            for (int i=0; i<LINE_LENGTH; i++)
+            {
+                for (int j=0; j<8; j++)
+                {
+                    if (x < image->width())
+                    {
+                        if (qGray(image->pixel(x,rowCnt)) < 128)
+                                        data[i] |= (1<<j);
+                    }
+                    x++;
+                }
+
+            }
+            qDebug() << "sending row " << rowCnt << ": ";
+            for (int i=0; i<LINE_LENGTH; i++)
+                qDebug() << "  " << (int)(data[i]) << "  ";
+            // go to next line of image
+            rowCnt++;
+            if (rowCnt >= image->height())
+                rowCnt = 0;
+        }
+        else
+            qDebug() << "no image loaded";
+    }
 
     port->write(data, LINE_LENGTH);
 
-    qDebug() << "created on line of bubbles";
+   //qDebug() << "created on line of bubbles";
 }
 
 
@@ -133,45 +193,10 @@ void MainWindow::onChkEnAutoToggled(bool checked)
 void MainWindow::onFreqSliderMoved(int i)
 {
     ui->lineEditFreq->setText(QString::number(i));
-    if (ui->chkBoxEnAuto->isChecked())
+    //if (ui->chkBoxEnAuto->isChecked())
         delayTimer.setInterval(i);
 }
 
-/*
-// show an error in the status line and power down the device
-void MainWindow::failure(QString msg)
-{
-    ui->lineStatus->setText(QString("<span style=\"font-weight:600; color:#ff0000;\">"+msg+"</span>"));
-    sendCmd("power off");
-    state = WAIT_FOR_REMOVE;
-}
-
-void MainWindow::onDsrChanged(bool status)
-{
-    if (status)
-        qDebug() << "device was turned on";
-    else
-        qDebug() << "device was turned off";
-}
-
-
-void MainWindow::sendCmd(const char * c)
-{
-    if (!port->isOpen())
-    {
-        qDebug() << "trying to send command altough port is not open";
-        return;
-    }
-    port->write(c);
-    port->write("\n");
-    ui->listSerialLog->addItem(QString(c));
-}
-
-void MainWindow::sendCmd(QString c)
-{
-    sendCmd(c.toAscii().constData());
-}
-*/
 void MainWindow::selectSerialPort(int ind)
 {
     QString portName = (ui->boxPort->itemData(ind)).toString();
@@ -209,4 +234,5 @@ void MainWindow::selectSerialPort(int ind)
    // ui->lineStatus->setText("RS232 connected");
     ui->btnBubble->setEnabled(true);    // enable button for bubble creation
     ui->chkBoxEnAuto->setEnabled(true);
+    ui->btnSelectFile->setEnabled(true);
 }

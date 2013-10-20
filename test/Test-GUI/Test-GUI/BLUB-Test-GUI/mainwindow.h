@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QString>
 #include <QSettings>
+#include <QImage>
 #include <QTimer>
 #include "qextserialport.h"
 
@@ -27,6 +28,8 @@ private:
     QextSerialPort *port;
     int portIndex;
     QTimer delayTimer;
+    QImage* image;
+    int rowCnt;
 
     // number of bytes per line
     static const int LINE_LENGTH;
@@ -38,6 +41,8 @@ private slots:
     void selectSerialPort(int ind);
     void onChkEnAutoToggled(bool checked);
     void onFreqSliderMoved(int i);
+    void selectImage();
+    void btnBubbleClicked();
 
 private:
     Ui::MainWindow *ui;

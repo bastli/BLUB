@@ -20,7 +20,6 @@
 	  <script src="../../assets/js/respond.min.js"></script>
 	<![endif]-->
 
-
 	<link href="assets/css/styles.css" rel="stylesheet" media="screen">
   </head>
   <body>
@@ -34,20 +33,19 @@
 			</div>
 		</div>
 	</header>
-
-	<div id="cursors">
-			<!-- The mouse pointers will be created here -->
-	</div>
-
-	<canvas id="paper" width="1900" height="1000">
-		Your browser needs to support canvas for this to work!
-	</canvas>
+		<canvas id="bubble_spool-canvas" resize="true">
+			Old geezer. Get some 21st century browser!
+		</canvas>
 
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="//code.jquery.com/jquery.js"></script>
+	<script src="vendor/jquery/jquery-2.0.3.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+	<script src="/vendor/paperjs/dist/paper.js"></script>
+
+	<script type="text/paperscript" src="/assets/js/graphics.js" canvas="bubble_spool-canvas"><
 
 
 	<script src="/socket.io/socket.io.js"></script>

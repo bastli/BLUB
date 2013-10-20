@@ -5,3 +5,9 @@ header {
 header .navbar-brand img {
 	height: 54px; /* #7fff00 */
 }
+
+@media (max-width: 767px) {
+	header .navbar-brand img {
+		height: 42px;
+	}
+}
