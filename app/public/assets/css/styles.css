@@ -1,13 +1,18 @@
 header {
 	background-color: Chartreuse; /* #7fff00 */
+	margin: 0 !important;
 }
 
-header .navbar-brand img {
-	height: 54px; /* #7fff00 */
+header img {
+	height: 48px; /* #7fff00 */
 }
 
 @media (max-width: 767px) {
-	header .navbar-brand img {
-		height: 42px;
+	header img {
+		height: 38px;
 	}
+}
+
+#bubble_spool {
+	overflow: hidden; /* Prevent a strange bug, where some pixels of body get added to the bottom, so there is always a scroll bar. /*
 }
