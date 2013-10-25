@@ -112,11 +112,6 @@ function init_bubble_spool(){
 	spool_group.position += new Point(Math.floor(spool_bounds.center.x - spool_group.position.x), 0);
 }
 
-/*
-function onFrame(event){
-	
-}*/
-
 
 function onResize(event){
 	init_bubble_spool();
