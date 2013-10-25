@@ -108,7 +108,6 @@ function init_bubble_spool(){
 
 	spool_group.remove();
 	spool_group = spool_group.rasterize();
-
 	spool_group.position += new Point(Math.floor(spool_bounds.center.x - spool_group.position.x), 0);
 }
 
