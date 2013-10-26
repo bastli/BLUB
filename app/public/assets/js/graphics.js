@@ -27,6 +27,7 @@ var bubble_piece;
 var spool_group;
 
 
+
 function create_bubble(width, height){
 	// Check if bubble dimensions are possible. Return if invalid.
 	if (width > height)
