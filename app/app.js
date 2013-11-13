@@ -1,5 +1,7 @@
-var HOST = '129.132.201.56';
+var HOST = '129.132.201.32';
 var PORT = 3000;
+
+var activity_timeout = 60000;
 
 
 // Constants: Tubes are the vertical columns, the preview is the whole preview frame.
@@ -46,6 +48,7 @@ console.log("Framebuffer is " + preview_vertical_bubbles + " bubbles high.");
 function drawPixel(coord) {
 	if (coord.x >= 0 && coord.x < tubes && coord.y >= 0 && coord.y < preview_vertical_bubbles)
 	{
+		cleared = false;
 		preview_frame_buffer[coord.y][coord.x] = true;
 		return true;
 	}
@@ -54,6 +57,7 @@ function drawPixel(coord) {
 }
 
 function clearPreview(coord) {
+	cleared = true;
 	create_frame_buffer();
 }
 
@@ -83,18 +87,19 @@ var fileServer = new static.Server('./public');
 // you will need to go to http://localhost:8124 to see it
 
 // Delete this row if you want to see debug messages
-//io.set('log level', 1);
+io.set('log level', 1);
 
 // Listen for incoming connections from clients
 io.sockets.on('connection', function (socket) {
 
-	console.log('Client connected.');
+	console.log('Client connected: ' + socket.handshake.address.address + ":" + socket.handshake.address.port);
 
 	// Start listening for mouse move events
 	socket.on('drawPixel', function (data) {
 
 		if (drawPixel(data.coord))
 		{
+			last_update = (new Date()).getTime();
 			socket.broadcast.emit('drawPixel', data);
 		}
 	});
@@ -106,30 +111,58 @@ io.sockets.on('connection', function (socket) {
 	socket.on('clearPreview', function () {
 		clearPreview();
 		socket.broadcast.emit('clearPreview');
+		last_update = (new Date()).getTime();
 	});
 
-	socket.on('disconnect', function () { console.log('Client disconnected.'); });
+	socket.on('disconnect', function () { console.log('Client disconnected: ' + socket.handshake.address.address + ":" + socket.handshake.address.port); });
 
 	socket.emit('setFrameBuffer', {frameBuffer: preview_frame_buffer});
 });
 
 
+var cleared = false;
 var offset = 0;
 var last_time = (new Date()).getTime();
+var last_update = (new Date()).getTime();
 var time_per_row = 1000 * min_bubble_distance / output_speed;
 var full_byte = String.fromCharCode(254);
 var all_LED = "L" + full_byte + full_byte + full_byte + full_byte + full_byte + full_byte + full_byte + full_byte + full_byte + full_byte + full_byte + full_byte + full_byte + full_byte + full_byte + full_byte + "\n";
 
-console.log(full_byte);
-
 function writeFrameBuffer() {
 
-	socket.write(all_LED);
+	var time = (new Date()).getTime();
 
-	var time = (new Date()).getTime()
+	if (time - last_update > activity_timeout)
+	{
+		if (!cleared)
+		{
+			socket.write("t");
+			
+			offset = 0;
+			io.sockets.emit('setPreviewCountdown', {value: 0});
+			
+			clearPreview();
+			io.sockets.emit('clearPreview');
+		}
+
+		return;
+	}
+
+	try
+	{
+		socket.write(all_LED);
+	}
+	catch (e)
+	{
+
+	}
+	
+
 	if ((new Date()).getTime() - last_time >= time_per_row)
 	{
 		offset += 1;
+
+		io.sockets.emit('setPreviewCountdown', {value: (offset / (preview_vertical_bubbles - 1))});
 		last_time = (new Date()).getTime()
 	}
 
@@ -146,26 +179,77 @@ function writeFrameBuffer() {
 			valve_states += "0";
 	}
 
-	socket.write("V" + valve_states + "00");
+	try
+	{
+		socket.write("V" + valve_states + "00");
+	}
+	catch (e)
+	{
+
+	}
 }
 
 
-var socket = net.createConnection(PORT, HOST);
+
 var interval = null;
 
-console.log('Socket created.');
+var socket = null
+
+try
+{
+  	socket = net.createConnection(PORT, HOST);
+  	console.log('TCP socket created.');
+}
+catch (e)
+{
+	socket = new net.Socket();
+}
+
+
+
 socket.on('data', function(data) {
   // Log the response from the HTTP server.
   console.log('TCP response: ' + data);
 }).on('connect', function() {
-  // Manually write an HTTP request.
-  socket.write("cBLUBapp\n");
-  interval = setInterval(writeFrameBuffer, 100);
+
+	console.log('TCP socket connected.');
+
+  	try
+	{
+  		socket.write("cBLUBapp\n");
+  	}
+  	catch (e)
+  	{
+
+  	}
+
+  	interval = setInterval(writeFrameBuffer, 100);
 }).on('end', function() {
+	console.log('TCP socket ended.');
+
 	clearInterval(interval);
-  console.log('TCP server disconnected.');
+}).on('close', function() {
+	console.log('TCP socket closed.');
+	
+
+	setTimeout(function(){
+		socket.connect(PORT, HOST);
+	}, 5000);
+}).on('error', function() {
+	console.log('TCP socket has error.');
+
+	socket.end();
 });
 
 
-console.log('Server running at http://localhost:8124/');
+process.on( 'SIGINT', function() {
+	socket.end();
+	console.log("TCP closed.");
 
+	console.log("Gracefully shutting down from SIGINT (Ctrl-C)");
+	// some other closing procedures go here
+	process.exit();
+})
+
+
+console.log('Server running at http://localhost:8124/');

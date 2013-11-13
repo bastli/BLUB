@@ -30,4 +30,8 @@ $(function(){
 		window.clear_preview();
 		window.draw_frame_buffer(data.frameBuffer);
 	});
+
+	window.socket.on('setPreviewCountdown', function (data) {
+		$('#countdown .progress-bar').css('width', (data.value * 100) + '%');
+	});
 });

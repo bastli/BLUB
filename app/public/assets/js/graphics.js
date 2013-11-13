@@ -105,6 +105,7 @@ function rasterizePreviewBubbleMask() {
 }
 
 function init_bubble_preview_bubbles() {
+	console.log("Canvas size is " + view.viewSize.width + " x " + view.viewSize.height + " rows in preview.");
 	console.log("Bubble grid will have " + preview_vertical_bubbles + " rows in preview.");
 
 	// Create bubble symbol
@@ -156,16 +157,18 @@ function init_bubble_preview_bubbles() {
 }
 
 function init_bubble_preview_bounds() {
+	/*
+	// Don't resize, if there are no other dimensions.
 	if(view.size.width == $('#bubble_preview').width())
 		return false;
-
+	*/
+	
 	var width = $('#bubble_preview').width();
-	pixel_per_cm = view.size.width / (tubes * tube_width);
 	var height = Math.ceil(bubble_preview_height * pixel_per_cm);
-
 	var viewSize = new Size(width, height);
+	pixel_per_cm = width / (tubes * tube_width);
 
-	if(view.size.equals(viewSize))
+	if(view.viewSize.equals(viewSize))
 		return false;
 
 	view.viewSize = viewSize;
