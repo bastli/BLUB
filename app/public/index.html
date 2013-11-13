@@ -3,8 +3,8 @@
   <head>
 	<title>BLUB by Bastli</title>
 
-	<link rel="icon" href="/assets/img/blub_icon.png" type="image/x-icon">
-	<link rel="apple-touch-icon" href="/assets/img/blub_icon.png"/>
+	<link rel="icon" href="assets/img/blub_icon.png" type="image/x-icon">
+	<link rel="apple-touch-icon" href="assets/img/blub_icon.png"/>
 
 	<meta charset="utf-8" />
 	
@@ -33,10 +33,38 @@
 			</div>
 		</div>
 	</header>
+	<!--
 	<div id="bubble_spool">
 		<canvas id="bubble_spool-canvas" resize="true" keepalive="true">
 			Old geezer. Get some 21st century browser!
 		</canvas>
+	</div>
+	-->
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-3 col-md-3 col-sm-4">
+				<div id="countdown" class="progress progress-striped active marged-y">
+				  	<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+				    	<span class="sr-only"></span>
+					</div>
+				</div>
+				<div class="marged-y well well-lg">
+					<form id="text_form" role="form">
+							<textarea id="text_input" class="form-control" rows="3" placeholder="Your random blahblah."></textarea>
+							<button type="submit" class="btn btn-primary btn-lg btn-block marged-y">Draw Text</button>
+					</form>
+
+					<button id="clear_button" type="button" class="btn btn-default btn-lg btn-block marged-y" style="margin-bottom: 0px">Clear All</button>
+				</div>
+			</div>
+			<div class="col-lg-9 col-md-9 col-sm-8">
+				<div id="bubble_preview" class="marged-y">
+					<canvas id="bubble_preview-canvas" resize>
+						Old geezer. Get some 21st century browser!
+					</canvas>
+				</div>
+			</div>
+		</div>
 	</div>
 
 
@@ -45,12 +73,12 @@
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
-	<script src="/vendor/paperjs/dist/paper.js"></script>
+	<script src="vendor/paperjs/dist/paper-full.min.js"></script>
 
-	<script type="text/paperscript" src="/assets/js/graphics.js" canvas="bubble_spool-canvas"><
+	<script type="text/paperscript" src="assets/js/graphics.js" canvas="bubble_preview-canvas"></script>
 
 
-	<script src="/socket.io/socket.io.js"></script>
+	<script src="socket.io/socket.io.js"></script>
 	<!--<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>-->
 	<script src="assets/js/script.js"></script>
   </body>

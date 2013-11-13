@@ -1,35 +1,36 @@
-// Constants: Tubes are the vertical columns, the spool is the whole preview frame.
+// Constants: Tubes are the vertical columns, the preview is the whole preview frame.
 
-var tubes = 64; // [#] Number of tubes
+var tubes = 62; // [#] Number of tubes
 var bubble_width = 1; // [cm] The 2D projected width of a bubble
 var bubble_height = 1.5; // [cm] The 2D projected height of a bubble
 var tube_width = 1.5; // [cm] The width of one tube
 var min_bubble_distance = 2.5; // [cm] The minimal vertical distance between two bubble centers
-var output_speed = 10; // [cm per seconds] Speed of the bubbles
 var small_bubble_offset = 1.5;// [cm] The approx. distance each bubble lift its upper predecessor bubbles.
 
 
-var frame_height = 200; // [cm]
-var spool_length = 300; // [cm]
-var minimal_visible_spool = 100; // [cm]
+var frame_height = 150; // [cm]
+var bubble_preview_height = frame_height;
+var minimal_visible_preview = 100; // [cm]
 var insert_picture_offset = 10; // [cm]
+var max_preview_mask_pieces = 100;
 
+var blackiness = 0.6; //[0-1]
 
 
 // Variables & Objects
-var spool_max_vertical_bubbles = Math.ceil(spool_length / min_bubble_distance);
-var spool_fitting_vertical_bubbles;
+var preview_frame_buffer;
+var preview_vertical_bubbles = Math.ceil(bubble_preview_height / min_bubble_distance);
 
-var spool_bounds;
-var spool_rectangle;
 var pixel_per_cm;
-var bubble_piece;
-var spool_group;
 
+var preview_bubble_grid = new Group();
+var preview_bubble_mask = new Group();
 
+var bubble_symbol;
+var bubble_mask_symbol;
 
 function create_bubble(width, height){
-	// Check if bubble dimensions are possible. Return if invalid.
+	// Check if bubble dimensions are possible. If not, create a circle bubble.
 	if (width > height)
 	{
 		console.log('Problem creating bubble: Wrong dimensions, to short. Creating a round one with same width.');
@@ -51,78 +52,293 @@ function create_bubble(width, height){
 	return raster_bubble;
 }
 
-function create_red_bar(offset) {
+function create_red_bar() {
 	var path = new Path();
 	// Give the stroke a color
 	path.strokeColor = 'red';
 	path.strokeWidth = 1;
-	path.moveTo(new Point(0, offset));
-	path.lineTo(new Point(view.size.width, offset));
+	path.moveTo(new Point(0, 0));
+	path.lineTo(new Point(view.size.width, 0));
 	path.remove();
 	return path;
 }
 
-var shape;
+function calculateCoord(point) {
+	var coord = new Point(Math.floor(point.x / (tube_width * pixel_per_cm)), Math.floor(point.y / (min_bubble_distance * pixel_per_cm)));
+	if(coord.x < 0 || coord.x >= tubes || coord.y < 0 || coord.y >= preview_vertical_bubbles)
+		return null;
+	else
+		return coord;
+}
 
-function init_bubble_spool(){
+function calculatePosition(coord) {
+	return new Point((coord.x + 1/2) * pixel_per_cm * tube_width, (coord.y + 1/2) * pixel_per_cm * min_bubble_distance);
+}
 
-	// Decide wether we scale the spool for widescreen (landscape, e.g. notebooks) or portrait (e.g. smartphones) devices.
-	if (view.size.width * minimal_visible_spool / (tubes * tube_width) <= view.size.height)
+function drawPixelAtCoord(coord)
+{
+	if (coord === null)
+		return;
+
+	var mask_piece_position = calculatePosition(coord);
+	
+	var bubble_mask_piece = bubble_mask_symbol.place();
+	bubble_mask_piece.position = mask_piece_position;
+	preview_bubble_mask.addChild(bubble_mask_piece);
+
+	rasterizePreviewBubbleMask();
+}
+
+function socketDrawPixelAtCoord(coord)
+{
+	drawPixelAtCoord(coord);
+	window.socket.emit('drawPixel', {coord: {x: coord.x, y: coord.y}});
+}
+
+function rasterizePreviewBubbleMask() {
+	if (preview_bubble_mask.children.length > max_preview_mask_pieces)
 	{
-		console.log("Spool gets mapped on portrait display.");
-		pixel_per_cm = view.size.width / (tubes * tube_width);
-		spool_bounds = new Rectangle(new Point(0,0), new Size(view.size.width, Math.ceil(spool_length * pixel_per_cm)));
+		var preview_bubble_mask_rasterized = preview_bubble_mask.rasterize();
+		preview_bubble_mask.removeChildren();
+		preview_bubble_mask.addChild(preview_bubble_mask_rasterized);
 	}
-	else 
-	{
-		console.log("Spool gets mapped on widescreen display.");
-		pixel_per_cm = view.size.height / minimal_visible_spool;
-		var side = Math.floor((view.size.width - pixel_per_cm * tubes * tube_width) / 2);
-		spool_bounds = new Rectangle(new Point(side,0), new Size(Math.ceil(tubes * tube_width * pixel_per_cm), Math.ceil(spool_length * pixel_per_cm)));
-	}
+}
 
-	console.log(spool_bounds);
+function init_bubble_preview_bubbles() {
+	console.log("Bubble grid will have " + preview_vertical_bubbles + " rows in preview.");
 
-	if (spool_rectangle)
-		spool_rectangle.remove();
+	// Create bubble symbol
+	bubble_symbol = new Symbol(create_bubble(Math.floor(bubble_width * pixel_per_cm), Math.floor(bubble_height * pixel_per_cm)));
 
-	spool_rectangle = new Path.Rectangle(spool_bounds);
-	spool_rectangle.fillColor = new Color(0,0,0,0.03);
+	// Create preview bubble grid (looks like a pixel raster fully out of bubbles).
+	preview_bubble_grid.remove();
+	preview_bubble_grid = new Group();
 
-	spool_fitting_vertical_bubbles = Math.ceil(view.size.height / pixel_per_cm / min_bubble_distance) + 2;
-
-	bubble_piece = new Symbol(create_bubble(Math.floor(bubble_width * pixel_per_cm), Math.floor(bubble_height * pixel_per_cm)));
-
-	if (spool_group)
-		spool_group.remove();
-	spool_group = new Group();
-
+	// Construct Bubble texture
 	for (var i = 0; i < tubes; i++)
 	{
-		for (var j = 0; j < spool_fitting_vertical_bubbles; j++)
+		for (var j = 0; j < preview_vertical_bubbles; j++)
 		{
-			var bubble_placed = bubble_piece.place();
-			bubble_placed.translate(new Point(Math.floor(tube_width * pixel_per_cm * (1/2 + i)), Math.floor(j * min_bubble_distance * pixel_per_cm)));
-			spool_group.addChild(bubble_placed);
+			var bubble_placed = bubble_symbol.place();
+			bubble_placed.translate(new Point(Math.floor(tube_width * pixel_per_cm * (1/2 + i)), Math.floor((1/2 + j) * min_bubble_distance * pixel_per_cm)));
+			preview_bubble_grid.addChild(bubble_placed);
 		}
 	}
 
-	spool_group.remove();
-	spool_group = spool_group.rasterize();
-	spool_group.position += new Point(Math.floor(spool_bounds.center.x - spool_group.position.x), 0);
+	// Rasterize preview_bubble_grid for speed up.
+	var preview_bubble_grid_unrasterized = preview_bubble_grid;
+	preview_bubble_grid = preview_bubble_grid.rasterize();
+	preview_bubble_grid_unrasterized.remove();
+	
+	
+	// Create preview bubble mask to only show the masked bubbles in the bubble grid.
+	preview_bubble_mask.remove();
+	preview_bubble_mask = new Group();
+	preview_bubble_mask.name = "preview_bubble_mask";
+	preview_bubble_mask.blendMode = "destination-atop";
+
+
+	// Create one single bubble mask rectangle. To be used whenever there is a bubble "pixel" drawn.
+	var bubble_mask_piece = new Path.Rectangle(new Point(0,0), new Point(Math.ceil(tube_width * pixel_per_cm), Math.ceil(min_bubble_distance * pixel_per_cm)));
+	bubble_mask_piece.fillColor = "#eee";
+
+	var bubble_mask_piece_unrasterized = bubble_mask_piece;
+	bubble_mask_piece = bubble_mask_piece.rasterize();
+	bubble_mask_piece_unrasterized.remove();
+
+	bubble_mask_piece.remove();
+	bubble_mask_symbol = new Symbol(bubble_mask_piece);
+
+
+	// Set tool accuracy
+	tool.maxDistance = min_bubble_distance * pixel_per_cm / 2;
+	tool.minDistance = tube_width * pixel_per_cm / 2;
+}
+
+function init_bubble_preview_bounds() {
+	if(view.size.width == $('#bubble_preview').width())
+		return false;
+
+	var width = $('#bubble_preview').width();
+	pixel_per_cm = view.size.width / (tubes * tube_width);
+	var height = Math.ceil(bubble_preview_height * pixel_per_cm);
+
+	var viewSize = new Size(width, height);
+
+	if(view.size.equals(viewSize))
+		return false;
+
+	view.viewSize = viewSize;
+	return true;
+}
+
+function setup_bubble_preview() {	
+	if (init_bubble_preview_bounds())
+	{
+		init_bubble_preview_bubbles();
+		window.socket.emit('getFrameBuffer');
+	}
+}
+
+function draw_frame_buffer(frameBuffer) {
+	for (var i = 0; i < preview_vertical_bubbles; i++) {
+    	for (var j = 0; j < tubes; j++) {
+    		if (frameBuffer[i][j])
+    			drawPixelAtCoord({x: j, y: i});
+    	}
+  	}
+}
+
+function clear_preview() {
+	preview_bubble_mask.removeChildren();
+}
+
+function socket_clear_preview() {
+	window.socket.emit('clearPreview');
+	clear_preview();
+}
+
+/* Hooks */
+
+function onResize()
+{
+	setup_bubble_preview();
 }
 
 
-function onResize(event){
-	init_bubble_spool();
+function onMouseDown(event) {
+	socketDrawPixelAtCoord(calculateCoord(event.point));
 }
 
-var offset_movement = 0;
+function onMouseDrag(event) {
+	socketDrawPixelAtCoord(calculateCoord(event.middlePoint));
+}
+
+function draw_raster(raster){
+	raster.remove();
+	raster.fitBounds(view.bounds);
+
+	var offset = Math.floor(insert_picture_offset / min_bubble_distance);
+	var pixel_per_cm = raster.width / (tubes * tube_width);
+
+	var image_bubble_height = Math.floor(Math.min(frame_height / min_bubble_distance, raster.height / (pixel_per_cm * min_bubble_distance)));
+	
+	for (var y = 0; y < image_bubble_height; y++) {
+		for (var x = 0; x < tubes; x++) {
+
+			var color_sample = raster.getPixel((1/2 + x) * tube_width * pixel_per_cm, (1/2 + y) * min_bubble_distance * pixel_per_cm);
+			
+			if (color_sample.brightness > blackiness || color_sample.alpha < blackiness)
+				continue;
+
+			socketDrawPixelAtCoord(new Point(x , y + offset));
+		}
+	}
+}
+
+function handle_image(image){
+	socket_clear_preview();
+
+	var raster = new Raster(image);
+
+	raster.remove();
+
+	var offset = Math.floor(insert_picture_offset / min_bubble_distance);
+	var pixel_per_cm = raster.width / (tubes * tube_width);
+
+	var image_bubble_height = Math.floor(Math.min(frame_height / min_bubble_distance, raster.height / (pixel_per_cm * min_bubble_distance)));
+	
+	for (var y = 0; y < image_bubble_height; y++) {
+		for (var x = 0; x < tubes; x++) {
+
+			var color_sample = raster.getPixel((1/2 + x) * tube_width * pixel_per_cm, (1/2 + y) * min_bubble_distance * pixel_per_cm);
+			
+			if (color_sample.brightness > blackiness || color_sample.alpha < blackiness)
+				continue;
+
+			socketDrawPixelAtCoord(new Point(x , y + offset));
+		}
+	}
+}
+
+function handle_url_image(url){
+	socket_clear_preview();
+
+	var raster = null;
+
+	new Raster(url).onLoad(function (){
+
+		raster = this;
+		raster.remove();
+
+		var offset = Math.floor(insert_picture_offset / min_bubble_distance);
+		var pixel_per_cm = raster.width / (tubes * tube_width);
+
+		var image_bubble_height = Math.floor(Math.min(frame_height / min_bubble_distance, raster.height / (pixel_per_cm * min_bubble_distance)));
+		
+		for (var y = 0; y < image_bubble_height; y++) {
+			for (var x = 0; x < tubes; x++) {
+
+				var color_sample = raster.getPixel((1/2 + x) * tube_width * pixel_per_cm, (1/2 + y) * min_bubble_distance * pixel_per_cm);
+				
+				if (color_sample.brightness > blackiness || color_sample.alpha < blackiness)
+					continue;
+
+				socketDrawPixelAtCoord(new Point(x , y + offset));
+			}
+		}
+	});
+}
+
+function draw_text(content){
+
+	var text = new PointText(view.center);
+	text.style = {
+		fontSize: 100,
+		fillColor: 'black',
+		justification: 'center'
+	};
+	// Set the content of the text item:
+	text.content = content;
+
+	var raster = text.rasterize();
+	text.remove();
+	draw_raster(raster);
+}
 
 function onFrame(event){
-	offset_movement += pixel_per_cm * event.delta * output_speed;
-	if (offset_movement >= min_bubble_distance * pixel_per_cm)
-		offset_movement %= min_bubble_distance * pixel_per_cm;
-
-	spool_group.position = new Point(spool_group.position.x, -offset_movement + view.size.height / 2);
+	
 }
+
+
+function onDocumentDrag(event) {
+	event.preventDefault();
+}
+
+function onDocumentDrop(event) {
+	event.preventDefault();
+
+	var file = event.dataTransfer.files[0];
+	var reader = new FileReader();
+
+	reader.onload = function ( event ) {
+		var image = document.createElement('img');
+		image.onload = function () {
+			handle_image(image);
+		};
+		image.src = event.target.result;
+	};
+	reader.readAsDataURL(file);
+}
+
+DomEvent.add(document, {
+	drop: onDocumentDrop,
+	dragover: onDocumentDrag,
+	dragleave: onDocumentDrag
+});
+
+window.draw_text = draw_text;
+window.clear_preview = clear_preview;
+window.socket_clear_preview = socket_clear_preview;
+window.draw_pixel = drawPixelAtCoord;
+window.draw_frame_buffer = draw_frame_buffer;

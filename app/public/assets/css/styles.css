@@ -13,6 +13,25 @@ header img {
 	}
 }
 
-#bubble_spool {
-	overflow: hidden; /* Prevent a strange bug, where some pixels of body get added to the bottom, so there is always a scroll bar. /*
+.padded {
+	padding: 5px;
+}
+
+.marged {
+	margin: 5px;
+}
+
+.marged-y {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+/*
+#bubble_preview {
+	overflow-y: scroll;
+}
+*/
+
+#bubble_preview-canvas {
+	background-color: #eee;
 }

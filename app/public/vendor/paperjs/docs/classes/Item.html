@@ -657,8 +657,34 @@ circle.position.x += 100;
 <div class="member-description hidden">
 
 <div class="member-text">
-	<p>The item's transformation matrix, defining position and dimensions in the
-document.</p>
+	<p>The item's transformation matrix, defining position and dimensions in
+relation to its parent item in which it is contained.</p>
+	
+	
+	<ul><b>Type:</b>
+	<li>
+		<a href="../classes/Matrix.html"><tt>Matrix</tt></a>
+	</li>
+	</ul>
+	
+	
+</div>
+
+</div>
+</div>
+		
+			
+<div id="globalmatrix" class="member">
+<div class="member-link">
+<a name="globalmatrix" href="#globalmatrix"><tt><b>globalMatrix</b></tt></a>
+</div>
+<div class="member-description hidden">
+
+<div class="member-text">
+	<p>The item's global transformation matrix in relation to the global project
+coordinate space.</p>
+	
+		<p>Read only.</p>
 	
 	
 	<ul><b>Type:</b>
@@ -1448,6 +1474,36 @@ miterLimit imposes a limit on the ratio of the miter length to the
 </div>
 		
 			
+<div id="windingrule" class="member">
+<div class="member-link">
+<a name="windingrule" href="#windingrule"><tt><b>windingRule</b></tt></a>
+</div>
+<div class="member-description hidden">
+
+<div class="member-text">
+	<p>The winding-rule with which the shape gets filled. Please note that only
+modern browsers support winding-rules other than <tt>'nonzero'</tt>.</p>
+	
+	
+		<ul><b>Default:</b>
+		<li>
+		<tt>'nonzero'</tt>
+		</li>
+		</ul>
+	
+	<ul><b>Type:</b>
+	<li>
+		<tt>String('nonzero', 'evenodd')</tt>
+	</li>
+	</ul>
+	
+	
+</div>
+
+</div>
+</div>
+		
+			
 	<h3>Fill Style</h3>
 
 <div id="fillcolor" class="member">
@@ -2154,13 +2210,85 @@ circle.set({
 </div>
 		
 			
+<div id="globaltolocal-point" class="member">
+<div class="member-link">
+<a name="globaltolocal-point" href="#globaltolocal-point"><tt><b>globalToLocal</b>(point)</tt></a>
+</div>
+<div class="member-description hidden">
+<div class="member-text">
+	<p>Converts the specified point from global project coordinates to local
+coordinates in relation to the the item's own coordinate space.</p>
+	
+<ul><b>Parameters:</b>
+
+<li>
+<tt>point:</tt> 
+<a href="../classes/Point.html"><tt>Point</tt></a>
+&mdash;&nbsp;the point to be transformed
+
+</li>
+
+</ul>
+
+	
+	<ul><b>Returns:</b>
+	
+		<li>
+<tt><a href="../classes/Point.html"><tt>Point</tt></a></tt>&nbsp;&mdash;&nbsp;the transformed point as a new instance
+</li>
+	
+	</ul>
+
+	
+	
+</div>
+</div>
+</div>
+		
+			
+<div id="localtoglobal-point" class="member">
+<div class="member-link">
+<a name="localtoglobal-point" href="#localtoglobal-point"><tt><b>localToGlobal</b>(point)</tt></a>
+</div>
+<div class="member-description hidden">
+<div class="member-text">
+	<p>Converts the specified point from local coordinates to global coordinates
+in relation to the the project coordinate space.</p>
+	
+<ul><b>Parameters:</b>
+
+<li>
+<tt>point:</tt> 
+<a href="../classes/Point.html"><tt>Point</tt></a>
+&mdash;&nbsp;the point to be transformed
+
+</li>
+
+</ul>
+
+	
+	<ul><b>Returns:</b>
+	
+		<li>
+<tt><a href="../classes/Point.html"><tt>Point</tt></a></tt>&nbsp;&mdash;&nbsp;the transformed point as a new instance
+</li>
+	
+	</ul>
+
+	
+	
+</div>
+</div>
+</div>
+		
+			
 <div id="isempty" class="member">
 <div class="member-link">
 <a name="isempty" href="#isempty"><tt><b>isEmpty</b>()</tt></a>
 </div>
 <div class="member-description hidden">
 <div class="member-text">
-	<p>Specifies wether the item has any content or not. The meaning of what
+	<p>Specifies whether the item has any content or not. The meaning of what
 content is differs from type to type. For example, a <a href="../classes/Group.html"><tt>Group</tt></a> with
 no children, a <a href="../classes/TextItem.html"><tt>TextItem</tt></a> with no text content and a <a href="../classes/Path.html"><tt>Path</tt></a>
 with no segments all are considered empty.</p>
@@ -2212,7 +2340,7 @@ item.</p>
 <li>
 <tt>insert:</tt> 
 <tt>Boolean</tt>
-&mdash;&nbsp;specifies wether the copy should be
+&mdash;&nbsp;specifies whether the copy should be
 inserted into the DOM. When set to <tt>true</tt>, it is inserted above the
 original.
 &mdash;&nbsp;optional, default: <tt>true</tt>
@@ -2374,7 +2502,7 @@ raster.scale(5);
 </div>
 <div class="member-description hidden">
 <div class="member-text">
-	<p>Checks wether the item's geometry contains the given point.</p>
+	<p>Checks whether the item's geometry contains the given point.</p>
 	
 <ul><b>Parameters:</b>
 
@@ -2437,29 +2565,30 @@ function onMouseDown(event) {
 <div class="member-text">
 	<p>Perform a hit test on the item (and its children, if it is a
 <a href="../classes/Group.html"><tt>Group</tt></a> or <a href="../classes/Layer.html"><tt>Layer</tt></a>) at the location of the specified point.</p>
-<p>The optional options object allows you to control the specifics of the
-hit test and may contain a combination of the following values:</p>
-<p><b>tolerance:</b> <tt>Number</tt> - The tolerance of the hit test in
-points.</p>
+<p>The options object allows you to control the specifics of the hit test
+and may contain a combination of the following values:</p>
+<p><b>options.tolerance:</b> <tt>Number</tt> – the tolerance of the hit test
+in points. Can also be controlled through
+<a href="../classes/Project.html#options"><tt>project.options</tt></a><tt>.hitTolerance</tt>.</p>
 <p><b>options.type:</b> Only hit test again a certain item
 type: <a href="../classes/PathItem.html"><tt>PathItem</tt></a>, <a href="../classes/Raster.html"><tt>Raster</tt></a>, <a href="../classes/TextItem.html"><tt>TextItem</tt></a>, etc.</p>
-<p><b>options.fill:</b> <tt>Boolean</tt> - Hit test the fill of items.</p>
-<p><b>options.stroke:</b> <tt>Boolean</tt> - Hit test the curves of path
+<p><b>options.fill:</b> <tt>Boolean</tt> – hit test the fill of items.</p>
+<p><b>options.stroke:</b> <tt>Boolean</tt> – hit test the curves of path
 items, taking into account stroke width.</p>
-<p><b>options.segment:</b> <tt>Boolean</tt> - Hit test for
+<p><b>options.segment:</b> <tt>Boolean</tt> – hit test for
 <a href="../classes/Segment.html#point"><tt>segment.point</tt></a> of <a href="../classes/Path.html"><tt>Path</tt></a> items.</p>
-<p><b>options.handles:</b> <tt>Boolean</tt> - Hit test for the handles
+<p><b>options.handles:</b> <tt>Boolean</tt> – hit test for the handles
 (<a href="../classes/Segment.html#handlein"><tt>segment.handleIn</tt></a> / <a href="../classes/Segment.html#handleout"><tt>segment.handleOut</tt></a>) of path segments.</p>
-<p><b>options.ends:</b> <tt>Boolean</tt> - Only hit test for the first or
+<p><b>options.ends:</b> <tt>Boolean</tt> – only hit test for the first or
 last segment points of open path items.</p>
-<p><b>options.bounds:</b> <tt>Boolean</tt> - Hit test the corners and
+<p><b>options.bounds:</b> <tt>Boolean</tt> – hit test the corners and
 side-centers of the bounding rectangle of items (<a href="../classes/Item.html#bounds"><tt>item.bounds</tt></a>).</p>
-<p><b>options.center:</b> <tt>Boolean</tt> - Hit test the
+<p><b>options.center:</b> <tt>Boolean</tt> – hit test the
 <a href="../classes/Rectangle.html#center"><tt>rectangle.center</tt></a> of the bounding rectangle of items
 (<a href="../classes/Item.html#bounds"><tt>item.bounds</tt></a>).</p>
-<p><b>options.guides:</b> <tt>Boolean</tt> - Hit test items that have
+<p><b>options.guides:</b> <tt>Boolean</tt> – hit test items that have
 <tt>Item#guide</tt> set to <tt>true</tt>.</p>
-<p><b>options.selected:</b> <tt>Boolean</tt> - Only hit selected items.</p>
+<p><b>options.selected:</b> <tt>Boolean</tt> – only hit selected items.<b</p>
 	
 <ul><b>Parameters:</b>
 
@@ -2484,9 +2613,9 @@ tolerance: 2 }</tt>
 	<ul><b>Returns:</b>
 	
 		<li>
-<tt><a href="../classes/HitResult.html"><tt>HitResult</tt></a></tt>&nbsp;&mdash;&nbsp;A hit result object that contains more
+<tt><a href="../classes/HitResult.html"><tt>HitResult</tt></a></tt>&nbsp;&mdash;&nbsp;a hit result object that contains more
 information about what exactly was hit or <tt>null</tt> if nothing was
-hit.
+hit
 </li>
 	
 	</ul>
@@ -2498,7 +2627,7 @@ hit.
 </div>
 		
 			
-<h3>Import / Export to JSON & SVG</h3>
+<h3>Importing / Exporting JSON and SVG</h3>
 
 <div id="exportjson" class="member">
 <div class="member-link">
@@ -2508,6 +2637,9 @@ hit.
 <div class="member-text">
 	<p>Exports (serializes) the item with its content and child items to a JSON
 data string.</p>
+<p>The options object offers control over some aspects of the SVG export:</p>
+<p><b>options.precision:</b> <tt>Number</tt> – the amount of fractional
+digits in numbers used in JSON data.</p>
 	
 <ul><b>Parameters:</b>
 
@@ -2542,9 +2674,11 @@ data string.</p>
 </div>
 <div class="member-description hidden">
 <div class="member-text">
-	<p>Imports (deserializes) the stored JSON data into this item's
-<a href="../classes/Item.html#children"><tt>item.children</tt></a> list. Note that the item is not cleared first.</p>
-<p>You can call <a href="../classes/Item.html#removechildren"><tt>item.removeChildren</tt></a>() to do so.</p>
+	<p>Imports (deserializes) the stored JSON data into this item. If the data
+describes an item of the same class or a parent class of the item, the
+data is imported into the item itself. If not, the imported item is added
+to this item's <a href="../classes/Item.html#children"><tt>item.children</tt></a> list. Note that not all type of
+items can have children.</p>
 	
 <ul><b>Parameters:</b>
 
@@ -2572,15 +2706,23 @@ data string.</p>
 <div class="member-description hidden">
 <div class="member-text">
 	<p>Exports the item with its content and child items as an SVG DOM.</p>
+<p>The options object offers control over some aspects of the SVG export:</p>
+<p><b>options.asString:</b> <tt>Boolean</tt> – wether a SVG node or a String
+is to be returned.</p>
+<p><b>options.precision:</b> <tt>Number</tt> – the amount of fractional
+digits in numbers used in SVG data.</p>
+<p><b>options.matchShapes:</b> <tt>Boolean</tt> – wether imported path
+items should tried to be converted to shape items, if their geometries
+match.</p>
 	
 <ul><b>Parameters:</b>
 
 <li>
 <tt>options:</tt> 
 <tt>Object</tt>
-&mdash;&nbsp;the export
-       options.
-&mdash;&nbsp;optional, default: <tt>{ asString: false, precision: 5 }</tt>
+&mdash;&nbsp;the export options.
+&mdash;&nbsp;optional, default: <tt>{ asString: false, precision: 5,
+matchShapes: false }</tt>
 </li>
 
 </ul>
@@ -2601,22 +2743,34 @@ data string.</p>
 </div>
 		
 			
-<div id="importsvg-node" class="member">
+<div id="importsvg-svg" class="member">
 <div class="member-link">
-<a name="importsvg-node" href="#importsvg-node"><tt><b>importSVG</b>(node)</tt></a>
+<a name="importsvg-svg" href="#importsvg-svg"><tt><b>importSVG</b>(svg[, options])</tt></a>
 </div>
 <div class="member-description hidden">
 <div class="member-text">
-	<p>Converts the SVG node and all its child nodes into Paper.js items and
-adds them as children to the this item.</p>
+	<p>Converts the provided SVG content into Paper.js items and adds them to
+the this item's children list.</p>
+<p>Note that the item is not cleared first. You can call
+<a href="../classes/Item.html#removechildren"><tt>item.removeChildren</tt></a>() to do so.</p>
+<p>The options object offers control over some aspects of the SVG import:</p>
+<p><b>options.expandShapes:</b> <tt>Boolean</tt> – wether imported shape
+items should be expanded to path items.</p>
 	
 <ul><b>Parameters:</b>
 
 <li>
-<tt>node:</tt> 
-<tt>SVGSVGElement</tt>
-&mdash;&nbsp;the SVG node to import
+<tt>svg:</tt> 
+<tt>SVGSVGElement</tt> / <tt>String</tt>
+&mdash;&nbsp;the SVG content to import
 
+</li>
+
+<li>
+<tt>options:</tt> 
+<tt>Object</tt>
+&mdash;&nbsp;the import options
+&mdash;&nbsp;optional, default: <tt>{ expandShapes: false }</tt>
 </li>
 
 </ul>
@@ -2902,6 +3056,32 @@ possible.
 	<p>Brings this item to the front of all other items within the same parent.</p>
 	
 	
+	
+	
+</div>
+</div>
+</div>
+		
+			
+<div id="reduce" class="member">
+<div class="member-link">
+<a name="reduce" href="#reduce"><tt><b>reduce</b>()</tt></a>
+</div>
+<div class="member-description hidden">
+<div class="member-text">
+	<p>If this is a group, layer or compound-path with only one child-item,
+the child-item is moved outside and the parent is erased. Otherwise, the
+item itself is returned unmodified.</p>
+	
+	
+	<ul><b>Returns:</b>
+	
+		<li>
+<tt><a href="../classes/Item.html"><tt>Item</tt></a></tt>&nbsp;&mdash;&nbsp;the reduced item
+</li>
+	
+	</ul>
+
 	
 	
 </div>
@@ -3812,13 +3992,13 @@ path.fitBounds(view.bounds);
 			
 <h3>Event Handling</h3>
 
-<div id="on-type-function" class="member">
+<div id="attach-type-function" class="member">
 <div class="member-link">
-<a name="on-type-function" href="#on-type-function"><tt><b>on</b>(type, function)</tt></a>
+<a name="attach-type-function" href="#attach-type-function"><tt><b>attach</b>(type, function)</tt></a>
 </div>
 <div class="member-description hidden">
 <div class="member-text">
-	<p>Attach an event handler to the item.</p>
+	<p>Attaches an event handler to the item.</p>
 	
 <ul><b>Parameters:</b>
 
@@ -3879,20 +4059,20 @@ path.on('mouseleave', function() {
 </div>
 		
 			
-<div id="on-param" class="member">
+<div id="attach-object" class="member">
 <div class="member-link">
-<a name="on-param" href="#on-param"><tt><b>on</b>(param)</tt></a>
+<a name="attach-object" href="#attach-object"><tt><b>attach</b>(object)</tt></a>
 </div>
 <div class="member-description hidden">
 <div class="member-text">
-	<p>Attach one or more event handlers to the item.</p>
+	<p>Attaches one or more event handlers to the item.</p>
 	
 <ul><b>Parameters:</b>
 
 <li>
-<tt>param:</tt> 
+<tt>object:</tt> 
 <tt>Object</tt>
-&mdash;&nbsp;An object literal containing one or more of the
+&mdash;&nbsp;an object literal containing one or more of the
 following properties: <tt>mousedown, mouseup, mousedrag, click,
 doubleclick, mousemove, mouseenter, mouseleave</tt>.
 
@@ -4011,9 +4191,9 @@ type
 </div>
 		
 			
-<div id="detach-param" class="member">
+<div id="detach-object" class="member">
 <div class="member-link">
-<a name="detach-param" href="#detach-param"><tt><b>detach</b>(param)</tt></a>
+<a name="detach-object" href="#detach-object"><tt><b>detach</b>(object)</tt></a>
 </div>
 <div class="member-description hidden">
 <div class="member-text">
@@ -4022,9 +4202,9 @@ type
 <ul><b>Parameters:</b>
 
 <li>
-<tt>param:</tt> 
+<tt>object:</tt> 
 <tt>Object</tt>
-&mdash;&nbsp;An object literal containing one or more of the
+&mdash;&nbsp;an object literal containing one or more of the
 following properties: <tt>mousedown, mouseup, mousedrag, click,
 doubleclick, mousemove, mouseenter, mouseleave</tt>
 
@@ -4061,7 +4241,7 @@ type
 <li>
 <tt>event:</tt> 
 <tt>Object</tt>
-&mdash;&nbsp;An object literal containing properties describing
+&mdash;&nbsp;an object literal containing properties describing
 the event.
 
 </li>
