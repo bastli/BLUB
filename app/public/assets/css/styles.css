@@ -35,3 +35,7 @@ header img {
 #bubble_preview-canvas {
 	background-color: #eee;
 }
+
+#text_input {
+	font-size: 20px;
+}

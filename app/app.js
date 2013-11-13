@@ -140,7 +140,7 @@ function writeFrameBuffer() {
 			
 			offset = 0;
 			io.sockets.emit('setPreviewCountdown', {value: 0});
-			
+
 			clearPreview();
 			io.sockets.emit('clearPreview');
 		}
@@ -148,14 +148,7 @@ function writeFrameBuffer() {
 		return;
 	}
 
-	try
-	{
-		socket.write(all_LED);
-	}
-	catch (e)
-	{
-
-	}
+	socket.write(all_LED);
 	
 
 	if ((new Date()).getTime() - last_time >= time_per_row)
@@ -179,14 +172,8 @@ function writeFrameBuffer() {
 			valve_states += "0";
 	}
 
-	try
-	{
-		socket.write("V" + valve_states + "00");
-	}
-	catch (e)
-	{
 
-	}
+	socket.write("V" + valve_states + "00");
 }
 
 
@@ -214,14 +201,7 @@ socket.on('data', function(data) {
 
 	console.log('TCP socket connected.');
 
-  	try
-	{
-  		socket.write("cBLUBapp\n");
-  	}
-  	catch (e)
-  	{
-
-  	}
+  	socket.write("cBLUBapp\n");
 
   	interval = setInterval(writeFrameBuffer, 100);
 }).on('end', function() {
