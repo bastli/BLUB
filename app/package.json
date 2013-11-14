@@ -1,0 +1,3 @@
+{ "name" : "BLUBapp"
+, "version" : "1.0.0"
+, "dependencies" : { "socket.io": "", "node-static": ""} }
