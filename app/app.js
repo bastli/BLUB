@@ -143,10 +143,12 @@ io.sockets.on('connection', function (socket) {
 
 	socket.emit('setFrameBuffer', {frameBuffer: preview_frame_buffer});
 
+	/*
 	// Debug code
 	socket.on('changeSmallBubbleOffset', function(data) {
 		small_bubble_offset = data.value;
 	});
+	*/
 });
 
 

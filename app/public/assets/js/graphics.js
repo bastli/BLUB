@@ -208,13 +208,20 @@ function onResize()
 	setup_bubble_preview();
 }
 
+function brushAtPoint(point) {
+	socketDrawPixelAtCoord(calculateCoord(point));
+	socketDrawPixelAtCoord(calculateCoord(point + (new Point(tube_width * pixel_per_cm, 0))));
+	socketDrawPixelAtCoord(calculateCoord(point - (new Point(tube_width * pixel_per_cm, 0))));
+	socketDrawPixelAtCoord(calculateCoord(point + (new Point(0, min_bubble_distance * pixel_per_cm))));
+	socketDrawPixelAtCoord(calculateCoord(point - (new Point(0, min_bubble_distance * pixel_per_cm))));
+}
 
 function onMouseDown(event) {
-	socketDrawPixelAtCoord(calculateCoord(event.point));
+	brushAtPoint(event.point);
 }
 
 function onMouseDrag(event) {
-	socketDrawPixelAtCoord(calculateCoord(event.middlePoint));
+	brushAtPoint(event.middlePoint);
 }
 
 function draw_raster(raster){
