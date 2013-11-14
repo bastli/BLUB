@@ -5,10 +5,10 @@ var bubble_width = 1; // [cm] The 2D projected width of a bubble
 var bubble_height = 1.5; // [cm] The 2D projected height of a bubble
 var tube_width = 1.5; // [cm] The width of one tube
 var min_bubble_distance = 2.5; // [cm] The minimal vertical distance between two bubble centers
-var small_bubble_offset = 1.5;// [cm] The approx. distance each bubble lift its upper predecessor bubbles.
+var small_bubble_offset = 0.2;// [cm] The approx. distance each bubble lift its upper predecessor bubbles.
 
 
-var frame_height = 150; // [cm]
+var frame_height = 125; // [cm]
 var bubble_preview_height = frame_height;
 var minimal_visible_preview = 100; // [cm]
 var insert_picture_offset = 10; // [cm]

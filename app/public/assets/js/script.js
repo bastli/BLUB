@@ -13,6 +13,10 @@ $(function(){
 		window.socket_clear_preview();
 	});
 
+	$('#small_bubble_offset_input').change(function(){ 
+		window.socket.emit('changeSmallBubbleOffset', {value: Number($(this).val())});
+	});
+
 
 	// Socket.IO magic
 

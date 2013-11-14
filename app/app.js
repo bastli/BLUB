@@ -13,7 +13,7 @@ var bubble_height = 1.5; // [cm] The 2D projected height of a bubble
 var tube_width = 1.5; // [cm] The width of one tube
 var min_bubble_distance = 2.5; // [cm] The minimal vertical distance between two bubble centers
 var output_speed = 12; // [cm per seconds] Speed of the bubbles
-var small_bubble_offset = 1.5;// [cm] The approx. distance each bubble lift its upper predecessor bubbles.
+var small_bubble_offset = 0.2;// [cm] The approx. distance each bubble lift its upper predecessor bubbles.
 
 
 var frame_height = 125; // [cm]
@@ -142,6 +142,11 @@ io.sockets.on('connection', function (socket) {
 	socket.on('disconnect', function () { console.log('Client disconnected: ' + socket.handshake.address.address + ":" + socket.handshake.address.port); });
 
 	socket.emit('setFrameBuffer', {frameBuffer: preview_frame_buffer});
+
+	// Debug code
+	socket.on('changeSmallBubbleOffset', function(data) {
+		small_bubble_offset = data.value;
+	}
 });
 
 
@@ -174,7 +179,6 @@ function writeFrameBuffer() {
 	}
 
 	socket.write(all_LED);
-	
 
 	if ((new Date()).getTime() - last_time >= time_per_row)
 	{
@@ -199,7 +203,6 @@ function writeFrameBuffer() {
 		else
 			valve_states += "0";
 	}
-
 
 	socket.write("V" + valve_states + "00");
 }
