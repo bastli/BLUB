@@ -6,7 +6,7 @@ The *BLUB App* provides a graphical front-end to *BLUB*. People can draw togethe
 To run the app, install node.js (http://nodejs.org/), ensure there is no other HTTP-Server running and execute
 
 ```bash
-npm install socket.io node-static # package for real-time WebSocket implementation and package for static content
+npm install # install package for real-time WebSocket implementation and package for static content. Referenced in package.json.
 node ./app/app.js # start the webapp
 ```
 

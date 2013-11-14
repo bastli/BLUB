@@ -16,7 +16,7 @@ var output_speed = 12; // [cm per seconds] Speed of the bubbles
 var small_bubble_offset = 1.5;// [cm] The approx. distance each bubble lift its upper predecessor bubbles.
 
 
-var frame_height = 150; // [cm]
+var frame_height = 125; // [cm]
 var bubble_preview_height = frame_height;
 var minimal_visible_preview = 100; // [cm]
 var insert_picture_offset = 10; // [cm]
@@ -29,6 +29,29 @@ var blackiness = 0.6; //[0-1]
 var preview_frame_buffer;
 var preview_vertical_bubbles = Math.ceil(bubble_preview_height / min_bubble_distance);
 
+var active_frame_buffer;
+
+
+function copy_preview_to_active(){
+	active_frame_buffer = new Array(preview_vertical_bubbles);
+  	for (var i = 0; i < preview_vertical_bubbles; i++) {
+    	active_frame_buffer[i] = new Array(tubes);
+  	}
+
+  	for (var j = 0; j < tubes; j++) {
+  		var count = 0;
+
+  		for (var i = 0; i < preview_vertical_bubbles; i++) {
+  			if (preview_frame_buffer[preview_vertical_bubbles - (1 + i)][j])
+  			{
+  				var offset = Math.round(count * small_bubble_offset / min_bubble_distance);
+  				if (offset <= i)
+    				active_frame_buffer[preview_vertical_bubbles - (1 + i - offset)][j] = true;
+    			count++;
+    		}
+    	}
+  	}
+}
 
 
 function create_frame_buffer(){
@@ -39,6 +62,7 @@ function create_frame_buffer(){
 }
 
 create_frame_buffer();
+copy_preview_to_active();
 
 
 
@@ -122,7 +146,7 @@ io.sockets.on('connection', function (socket) {
 
 
 var cleared = false;
-var offset = 0;
+var offset = preview_vertical_bubbles;
 var last_time = (new Date()).getTime();
 var last_update = (new Date()).getTime();
 var time_per_row = 1000 * min_bubble_distance / output_speed;
@@ -139,7 +163,7 @@ function writeFrameBuffer() {
 		{
 			socket.write("t");
 			
-			offset = 0;
+			offset = preview_vertical_bubbles;
 			io.sockets.emit('setPreviewCountdown', {value: 0});
 
 			clearPreview();
@@ -161,13 +185,16 @@ function writeFrameBuffer() {
 	}
 
 	if(offset >= preview_vertical_bubbles)
+	{
 		offset %= preview_vertical_bubbles;
+		copy_preview_to_active();
+	}
 
 	var valve_states = "";
 
 	for (var i = 0; i < tubes; i++)
 	{
-		if (preview_frame_buffer[offset][i])
+		if (active_frame_buffer[offset][i])
 			valve_states += "1";
 		else
 			valve_states += "0";
@@ -186,13 +213,13 @@ var socket = null
 try
 {
   	socket = net.createConnection(PORT, HOST);
-  	console.log('TCP socket created.');
 }
 catch (e)
 {
 	socket = new net.Socket();
 }
 
+console.log('TCP socket created.');
 
 
 socket.on('data', function(data) {
