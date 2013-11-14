@@ -215,7 +215,7 @@ socket.on('data', function(data) {
 
 	setTimeout(function(){
 		socket.connect(PORT, HOST);
-	}, 5000);
+	}, 10000);
 }).on('error', function() {
 	console.log('TCP socket has error.');
 
