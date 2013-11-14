@@ -1,5 +1,6 @@
-var HOST = '129.132.201.32';
+var HOST = 'localhost';
 var PORT = 3000;
+var WEB_PORT = 80;
 
 var activity_timeout = 60000;
 
@@ -68,7 +69,7 @@ var app = require('http').createServer(handler),
 	static = require('node-static'), // for serving files
 	net = require('net');
 
-app.listen(8124);
+app.listen(WEB_PORT);
 
 function handler (request, response) {
 
@@ -232,4 +233,4 @@ process.on( 'SIGINT', function() {
 })
 
 
-console.log('Server running at http://localhost:8124/');
+console.log('Server running at http://localhost:' + WEB_PORT + '/');
