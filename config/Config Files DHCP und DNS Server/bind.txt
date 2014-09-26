@@ -1,0 +1,46 @@
+root@blub:~# cat /etc/bind/named.conf
+// This is the primary configuration file for the BIND DNS server named.
+//
+// Please read /usr/share/doc/bind9/README.Debian.gz for information on the
+// structure of BIND configuration files in Debian, *BEFORE* you customize
+// this configuration file.
+//
+// If you are just adding zones, please do that in /etc/bind/named.conf.local
+
+include "/etc/bind/named.conf.options";
+include "/etc/bind/named.conf.local";
+//include "/etc/bind/named.conf.default-zones";
+
+
+
+
+root@blub:~# cat /etc/bind/named.conf.local
+//
+// Do any local configuration here
+//
+zone "."      { type master; file "/etc/bind/db.blub"; };
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+
+
+
+bastli@debian:~$ cat /etc/bind/db.blub
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     localhost. root.localhost. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@       IN      NS      localhost.
+@       IN      NS      10.0.0.1.
+
+; TODO: kusis server hier eintragen!
+*.      IN      A       10.0.0.1

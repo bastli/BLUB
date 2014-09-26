@@ -1,0 +1,13 @@
+X:\Dan\BLUBmotion\BLUBmotion\BLUBmotion\bin\Release\BLUBmotion.exe.config
+X:\Dan\BLUBmotion\BLUBmotion\BLUBmotion\bin\Release\BLUBmotion.exe
+X:\Dan\BLUBmotion\BLUBmotion\BLUBmotion\bin\Release\BLUBmotion.pdb
+X:\Dan\BLUBmotion\BLUBmotion\BLUBmotion\bin\Release\LeapCSharp.NET4.0.dll
+X:\Dan\BLUBmotion\BLUBmotion\BLUBmotion\obj\Release\MainWindow.baml
+X:\Dan\BLUBmotion\BLUBmotion\BLUBmotion\obj\Release\MainWindow.g.cs
+X:\Dan\BLUBmotion\BLUBmotion\BLUBmotion\obj\Release\App.g.cs
+X:\Dan\BLUBmotion\BLUBmotion\BLUBmotion\obj\Release\BLUBmotion_MarkupCompile.cache
+X:\Dan\BLUBmotion\BLUBmotion\BLUBmotion\obj\Release\BLUBmotion.g.resources
+X:\Dan\BLUBmotion\BLUBmotion\BLUBmotion\obj\Release\BLUBmotion.Properties.Resources.resources
+X:\Dan\BLUBmotion\BLUBmotion\BLUBmotion\obj\Release\BLUBmotion.csproj.GenerateResource.Cache
+X:\Dan\BLUBmotion\BLUBmotion\BLUBmotion\obj\Release\BLUBmotion.exe
+X:\Dan\BLUBmotion\BLUBmotion\BLUBmotion\obj\Release\BLUBmotion.pdb

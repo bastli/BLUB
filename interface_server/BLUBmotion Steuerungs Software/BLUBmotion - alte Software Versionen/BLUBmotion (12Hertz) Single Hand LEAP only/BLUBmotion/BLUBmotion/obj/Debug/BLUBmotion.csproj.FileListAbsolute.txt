@@ -1,0 +1,69 @@
+Z:\Projekte Bastli\Software\BLUBmotion\BLUBmotion\BLUBmotion\bin\Debug\BLUBmotion.exe.config
+Z:\Projekte Bastli\Software\BLUBmotion\BLUBmotion\BLUBmotion\bin\Debug\BLUBmotion.exe
+Z:\Projekte Bastli\Software\BLUBmotion\BLUBmotion\BLUBmotion\bin\Debug\BLUBmotion.pdb
+Z:\Projekte Bastli\Software\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.csprojResolveAssemblyReference.cache
+Z:\Projekte Bastli\Software\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\MainWindow.baml
+Z:\Projekte Bastli\Software\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\MainWindow.g.cs
+Z:\Projekte Bastli\Software\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\App.g.cs
+Z:\Projekte Bastli\Software\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion_MarkupCompile.cache
+Z:\Projekte Bastli\Software\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.g.resources
+Z:\Projekte Bastli\Software\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.Properties.Resources.resources
+Z:\Projekte Bastli\Software\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.csproj.GenerateResource.Cache
+Z:\Projekte Bastli\Software\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.exe
+Z:\Projekte Bastli\Software\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.pdb
+\\BASTLIFS\Bastli NAS\Projekte Bastli\Software\BLUBmotion\BLUBmotion\BLUBmotion\bin\Debug\BLUBmotion.exe.config
+\\BASTLIFS\Bastli NAS\Projekte Bastli\Software\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.exe
+\\BASTLIFS\Bastli NAS\Projekte Bastli\Software\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.pdb
+V:\Software\BLUBmotion\BLUBmotion\BLUBmotion\bin\Debug\BLUBmotion.exe.config
+V:\Software\BLUBmotion\BLUBmotion\BLUBmotion\bin\Debug\BLUBmotion.exe
+V:\Software\BLUBmotion\BLUBmotion\BLUBmotion\bin\Debug\BLUBmotion.pdb
+V:\Software\BLUBmotion\BLUBmotion\BLUBmotion\bin\Debug\LeapCSharp.NET4.0.dll
+V:\Software\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\MainWindow.baml
+V:\Software\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\MainWindow.g.cs
+V:\Software\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\App.g.cs
+V:\Software\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion_MarkupCompile.cache
+V:\Software\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.g.resources
+V:\Software\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.Properties.Resources.resources
+V:\Software\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.csproj.GenerateResource.Cache
+V:\Software\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.exe
+V:\Software\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.pdb
+V:\Software\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.csprojResolveAssemblyReference.cache
+C:\Users\bastli\Desktop\BLUBmotion\BLUBmotion\BLUBmotion\bin\Debug\BLUBmotion.exe.config
+C:\Users\bastli\Desktop\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.exe
+C:\Users\bastli\Desktop\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.pdb
+C:\Users\bastli\Desktop\BLUBmotion\BLUBmotion\BLUBmotion\bin\Debug\BLUBmotion.exe
+C:\Users\bastli\Desktop\BLUBmotion\BLUBmotion\BLUBmotion\bin\Debug\BLUBmotion.pdb
+C:\Users\bastli\Desktop\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.csprojResolveAssemblyReference.cache
+C:\Users\bastli\Desktop\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\MainWindow.baml
+C:\Users\bastli\Desktop\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\MainWindow.g.cs
+C:\Users\bastli\Desktop\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\App.g.cs
+C:\Users\bastli\Desktop\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion_MarkupCompile.cache
+C:\Users\bastli\Desktop\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.g.resources
+C:\Users\bastli\Desktop\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.Properties.Resources.resources
+C:\Users\bastli\Desktop\BLUBmotion\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.csproj.GenerateResource.Cache
+C:\Users\bastli\Desktop\BLUBmotion - 12Hertz Edition\BLUBmotion\BLUBmotion\bin\Debug\BLUBmotion.exe.config
+C:\Users\bastli\Desktop\BLUBmotion - 12Hertz Edition\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.exe
+C:\Users\bastli\Desktop\BLUBmotion - 12Hertz Edition\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.pdb
+C:\Users\bastli\Desktop\BLUBmotion - 12Hertz Edition\BLUBmotion\BLUBmotion\bin\Debug\BLUBmotion.exe
+C:\Users\bastli\Desktop\BLUBmotion - 12Hertz Edition\BLUBmotion\BLUBmotion\bin\Debug\BLUBmotion.pdb
+C:\Users\bastli\Desktop\BLUBmotion - 12Hertz Edition\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.csprojResolveAssemblyReference.cache
+C:\Users\bastli\Desktop\BLUBmotion - 12Hertz Edition\BLUBmotion\BLUBmotion\obj\Debug\MainWindow.baml
+C:\Users\bastli\Desktop\BLUBmotion - 12Hertz Edition\BLUBmotion\BLUBmotion\obj\Debug\MainWindow.g.cs
+C:\Users\bastli\Desktop\BLUBmotion - 12Hertz Edition\BLUBmotion\BLUBmotion\obj\Debug\App.g.cs
+C:\Users\bastli\Desktop\BLUBmotion - 12Hertz Edition\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion_MarkupCompile.cache
+C:\Users\bastli\Desktop\BLUBmotion - 12Hertz Edition\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.g.resources
+C:\Users\bastli\Desktop\BLUBmotion - 12Hertz Edition\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.Properties.Resources.resources
+C:\Users\bastli\Desktop\BLUBmotion - 12Hertz Edition\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.csproj.GenerateResource.Cache
+C:\Users\Bastli\Desktop\BLUB\BLUBmotion Steuerungs Software\BLUBmotion - alte Software Versionen\BLUBmotion (12Hertz) Single Hand LEAP only\BLUBmotion\BLUBmotion\bin\Debug\BLUBmotion.exe.config
+C:\Users\Bastli\Desktop\BLUB\BLUBmotion Steuerungs Software\BLUBmotion - alte Software Versionen\BLUBmotion (12Hertz) Single Hand LEAP only\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.exe
+C:\Users\Bastli\Desktop\BLUB\BLUBmotion Steuerungs Software\BLUBmotion - alte Software Versionen\BLUBmotion (12Hertz) Single Hand LEAP only\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.pdb
+C:\Users\Bastli\Desktop\BLUB\BLUBmotion Steuerungs Software\BLUBmotion - alte Software Versionen\BLUBmotion (12Hertz) Single Hand LEAP only\BLUBmotion\BLUBmotion\bin\Debug\BLUBmotion.exe
+C:\Users\Bastli\Desktop\BLUB\BLUBmotion Steuerungs Software\BLUBmotion - alte Software Versionen\BLUBmotion (12Hertz) Single Hand LEAP only\BLUBmotion\BLUBmotion\bin\Debug\BLUBmotion.pdb
+C:\Users\Bastli\Desktop\BLUB\BLUBmotion Steuerungs Software\BLUBmotion - alte Software Versionen\BLUBmotion (12Hertz) Single Hand LEAP only\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.csprojResolveAssemblyReference.cache
+C:\Users\Bastli\Desktop\BLUB\BLUBmotion Steuerungs Software\BLUBmotion - alte Software Versionen\BLUBmotion (12Hertz) Single Hand LEAP only\BLUBmotion\BLUBmotion\obj\Debug\MainWindow.baml
+C:\Users\Bastli\Desktop\BLUB\BLUBmotion Steuerungs Software\BLUBmotion - alte Software Versionen\BLUBmotion (12Hertz) Single Hand LEAP only\BLUBmotion\BLUBmotion\obj\Debug\MainWindow.g.cs
+C:\Users\Bastli\Desktop\BLUB\BLUBmotion Steuerungs Software\BLUBmotion - alte Software Versionen\BLUBmotion (12Hertz) Single Hand LEAP only\BLUBmotion\BLUBmotion\obj\Debug\App.g.cs
+C:\Users\Bastli\Desktop\BLUB\BLUBmotion Steuerungs Software\BLUBmotion - alte Software Versionen\BLUBmotion (12Hertz) Single Hand LEAP only\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion_MarkupCompile.cache
+C:\Users\Bastli\Desktop\BLUB\BLUBmotion Steuerungs Software\BLUBmotion - alte Software Versionen\BLUBmotion (12Hertz) Single Hand LEAP only\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.g.resources
+C:\Users\Bastli\Desktop\BLUB\BLUBmotion Steuerungs Software\BLUBmotion - alte Software Versionen\BLUBmotion (12Hertz) Single Hand LEAP only\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.Properties.Resources.resources
+C:\Users\Bastli\Desktop\BLUB\BLUBmotion Steuerungs Software\BLUBmotion - alte Software Versionen\BLUBmotion (12Hertz) Single Hand LEAP only\BLUBmotion\BLUBmotion\obj\Debug\BLUBmotion.csproj.GenerateResource.Cache
